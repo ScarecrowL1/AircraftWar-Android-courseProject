@@ -2,6 +2,7 @@ package com.example.aircraftwar;
 
 import static com.example.aircraftwar.Image_Manage.BACKGROUND_IMAGE;
 import static com.example.aircraftwar.Image_Manage.HEROAIRCRAFT_IMAGE;
+import static com.example.aircraftwar.MainActivity.StateHeight;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -57,8 +58,8 @@ public class Game extends View{
         }.start();
     }
     private void logic(){
-        y1 += 15;
-        y2 += 15;
+        y1 += 10;
+        y2 += 10;
         if(y1>=MainActivity.height){
             y1 = y2-MainActivity.height;
         }
@@ -77,7 +78,7 @@ public class Game extends View{
         /*
         英雄机绘制
          */
-        canvas.drawBitmap(HEROAIRCRAFT_IMAGE,(MainActivity.width-HEROAIRCRAFT_IMAGE.getHeight())/2,MainActivity.height-HEROAIRCRAFT_IMAGE.getHeight(),null);
+        canvas.drawBitmap(HEROAIRCRAFT_IMAGE,(MainActivity.width-HEROAIRCRAFT_IMAGE.getHeight())/2,MainActivity.height-HEROAIRCRAFT_IMAGE.getHeight()-StateHeight,null);
         /*
         敌机绘制
          */

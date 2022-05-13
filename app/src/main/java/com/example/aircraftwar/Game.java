@@ -1,5 +1,8 @@
 package com.example.aircraftwar;
 
+import static com.example.aircraftwar.Image_Manage.BACKGROUND_IMAGE;
+import static com.example.aircraftwar.Image_Manage.HEROAIRCRAFT_IMAGE;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,19 +17,21 @@ import android.view.View;
  * Created by Administrator on 2017/10/19.
  */
 
-public class Game extends View implements View.OnClickListener {
+public class Game extends View{
     // 定义画笔
     private Paint mPaint;
     // 用于获取文字的宽和高
     private Rect mRect;
     // 计数值，每点击一次本控件，其值增加1
-    private int mCount=0;
 
     public static int y1;
     public static int y2;
 
+    private static int count = 0;
+
     public Game(Context context, AttributeSet attrs) {
         super(context, attrs);
+        Image_Manage image_manage = new Image_Manage(context,attrs);
         y1 = 0;
         y2 = y1-MainActivity.height;
         // 初始化画笔、Rect
@@ -42,13 +47,14 @@ public class Game extends View implements View.OnClickListener {
                         e.printStackTrace();
                     }
                     logic();
-                    mCount++;
+                    count++;
+                    if(count == 20){
+                        count = 0;
+                    }
                     invalidate();
                 }
             }
         }.start();
-        // 本控件的点击事件
-        setOnClickListener(this);
     }
     private void logic(){
         y1 += 15;
@@ -62,14 +68,23 @@ public class Game extends View implements View.OnClickListener {
     }
     @Override
     protected void onDraw(Canvas canvas) {
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.background);
-        Bitmap mbitmap = Bitmap.createScaledBitmap(bitmap, MainActivity.width, MainActivity.height, true);
-        Bitmap heroaircraft_image = BitmapFactory.decodeResource(getResources(),R.mipmap.hero);
         super.onDraw(canvas);
-        mPaint.setColor(Color.BLUE);
-        canvas.drawBitmap(mbitmap,0,y1,null);
-        canvas.drawBitmap(mbitmap,0,y2,null);
-        canvas.drawBitmap(heroaircraft_image,(MainActivity.width-heroaircraft_image.getHeight())/2,MainActivity.height-heroaircraft_image.getHeight(),null);
+        /*
+        绘制背景图
+         */
+        canvas.drawBitmap(BACKGROUND_IMAGE,0,y1,null);
+        canvas.drawBitmap(BACKGROUND_IMAGE,0,y2,null);
+        /*
+        英雄机绘制
+         */
+        canvas.drawBitmap(HEROAIRCRAFT_IMAGE,(MainActivity.width-HEROAIRCRAFT_IMAGE.getHeight())/2,MainActivity.height-HEROAIRCRAFT_IMAGE.getHeight(),null);
+        /*
+        敌机绘制
+         */
+
+
+
+
         // 绘制一个填充色为蓝色的矩形
         /*canvas.drawRect(0, 0, getWidth(), getHeight(), mPaint);
         mPaint.setColor(Color.WHITE);
@@ -84,7 +99,4 @@ public class Game extends View implements View.OnClickListener {
                 + textHeight / 2, mPaint);*/
     }
 
-    @Override
-    public void onClick(View view) {
-    }
 }

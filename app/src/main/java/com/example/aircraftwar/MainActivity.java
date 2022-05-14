@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public static int StateHeight;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         WindowManager manager = this.getWindowManager();
         DisplayMetrics outMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(outMetrics);

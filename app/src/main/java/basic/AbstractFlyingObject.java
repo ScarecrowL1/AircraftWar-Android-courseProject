@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 
 import com.example.aircraftwar.MainActivity;
 
+import aircraft.AbstractAircraft;
+
 
 /**
  * 可飞行对象的父类
@@ -97,7 +99,7 @@ public abstract class AbstractFlyingObject {
      * @return true: 我方被击中; false 我方未被击中
      */
 
-    /*public boolean crash(AbstractFlyingObject abstractFlyingObject) {
+    public boolean crash(AbstractFlyingObject abstractFlyingObject) {
         // 缩放因子，用于控制 y轴方向区域范围
         int factor = this instanceof AbstractAircraft ? 2 : 1;
         int fFactor = abstractFlyingObject instanceof AbstractAircraft ? 2 : 1;
@@ -111,7 +113,7 @@ public abstract class AbstractFlyingObject {
                 && x - (fWidth+this.getWidth())/2 < locationX
                 && y + ( fHeight/fFactor+this.getHeight()/factor )/2 > locationY
                 && y - ( fHeight/fFactor+this.getHeight()/factor )/2 < locationY;
-    }*/
+    }
 
     public int getLocationX() {
         return locationX;
@@ -131,16 +133,13 @@ public abstract class AbstractFlyingObject {
     }
 
     public Bitmap getImage() {
-        if (image == null){
-            //image = Bitmap.createBitmap();
-        }
         return image;
     }
-    /*
+
     public int getWidth() {
         if (width == -1){
             // 若未设置，则查询图片宽度并设置
-            width = ImageManager.get(this).getWidth();
+            width = image.getWidth();
         }
         return width;
     }
@@ -148,10 +147,10 @@ public abstract class AbstractFlyingObject {
     public int getHeight() {
         if (height == -1){
             // 若未设置，则查询图片高度并设置
-            height = ImageManager.get(this).getHeight();
+            height = image.getHeight();
         }
         return height;
-    }*/
+    }
 
     public boolean notValid() {
         return !this.isValid;

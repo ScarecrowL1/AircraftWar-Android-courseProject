@@ -14,6 +14,8 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
+import aircraft.HeroAircraft;
+
 /**
  * Created by Administrator on 2017/10/19.
  */
@@ -30,14 +32,14 @@ public class Game extends View{
 
     private static int count = 0;
 
+    private HeroAircraft heroAircraft;
+
     public Game(Context context, AttributeSet attrs) {
         super(context, attrs);
         Image_Manage image_manage = new Image_Manage(context,attrs);
         y1 = 0;
         y2 = y1-MainActivity.height;
-        // 初始化画笔、Rect
-        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mRect = new Rect();
+        heroAircraft = HeroAircraft.getInstance();
         new Thread(){
             @Override
             public void run(){
@@ -78,7 +80,7 @@ public class Game extends View{
         /*
         英雄机绘制
          */
-        canvas.drawBitmap(HEROAIRCRAFT_IMAGE,(MainActivity.width-HEROAIRCRAFT_IMAGE.getHeight())/2,MainActivity.height-HEROAIRCRAFT_IMAGE.getHeight()-StateHeight,null);
+        canvas.drawBitmap(HEROAIRCRAFT_IMAGE,heroAircraft.getLocationX()-HEROAIRCRAFT_IMAGE.getWidth()/2,heroAircraft.getLocationY()-HEROAIRCRAFT_IMAGE.getHeight(),null);
         /*
         敌机绘制
          */

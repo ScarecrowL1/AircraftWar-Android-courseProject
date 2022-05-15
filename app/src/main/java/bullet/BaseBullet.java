@@ -1,5 +1,7 @@
 package bullet;
 
+import com.example.aircraftwar.MainActivity;
+
 import basic.AbstractFlyingObject;
 
 /**
@@ -22,12 +24,12 @@ public class BaseBullet extends AbstractFlyingObject {
         super.forward();
 
         // 判定 x 轴出界
-        if (locationX <= 0 || locationX >= width) {
+        if (locationX <= 0 || locationX >= MainActivity.width) {
             vanish();
         }
 
         // 判定 y 轴出界
-        if (speedY > 0 && locationY >= height) {
+        if (speedY > 0 && locationY >= MainActivity.height) {
             // 向下飞行出界
             vanish();
         }else if (locationY <= 0){

@@ -10,6 +10,7 @@ public class Image_Manage extends View {
     public static Bitmap BACKGROUND_IMAGE;
     public static Bitmap HEROAIRCRAFT_IMAGE;
     public static Bitmap MOBENEMY_IMAGE;
+    public static Bitmap HERO_BULLET_IMAGE;
     public Image_Manage(Context context, AttributeSet attrs){
         super(context,attrs);
         init();
@@ -21,5 +22,6 @@ public class Image_Manage extends View {
         HEROAIRCRAFT_IMAGE = Bitmap.createScaledBitmap(HEROAIRCRAFT_IMAGE,200,200,true);
         MOBENEMY_IMAGE = BitmapFactory.decodeResource(getResources(),R.mipmap.mob);
         MOBENEMY_IMAGE = Bitmap.createScaledBitmap(MOBENEMY_IMAGE,200,200,true);
+        HERO_BULLET_IMAGE = BitmapFactory.decodeResource(getResources(),R.mipmap.bullet_hero);
     }
 }

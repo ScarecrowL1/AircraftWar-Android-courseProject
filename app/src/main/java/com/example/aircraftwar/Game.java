@@ -21,11 +21,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 import DrawAction.Draw_Bullet;
+import DrawAction.Draw_enemy;
 import aircraft.AbstractAircraft;
+import aircraft.Enemy;
 import aircraft.HeroAircraft;
+import aircraft.MobEnemy;
 import basic.AbstractFlyingObject;
 import bullet.BaseBullet;
 import bullet.HeroBullet;
+import factory.EnemyFactory;
+import factory.MobEnemyFactory;
 
 /**
  * Created by Administrator on 2017/10/19.
@@ -38,15 +43,17 @@ public class Game extends View{
     private Rect mRect;
     // 计数值，每点击一次本控件，其值增加1
 
-    public static int y1;
-    public static int y2;
+    private static int y1;
+    private static int y2;
 
-    private static int count = 0;
+    private static int count_shoot = 0;
+    private static int Mobenemy_come_out_count = 0;
+    private static int mobenemyMaxNumber = 5;
 
-
-    private List<AbstractAircraft> Mob_Enemy_List;
+    private List<MobEnemy> Mob_Enemy_List;
     private List<BaseBullet> Hero_bullet_List;
     private HeroAircraft heroAircraft;
+    private EnemyFactory enemyFactory;
 
     public Game(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -66,10 +73,16 @@ public class Game extends View{
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    count += 1;
-                    if(count == 20){
+                    count_shoot += 1;
+                    Mobenemy_come_out_count += 1;
+                    if(count_shoot == 20){
                         shoot();
-                        count = 0;
+                        count_shoot = 0;
+                    }
+                    if(Mobenemy_come_out_count == 20 && Mob_Enemy_List.size()<=mobenemyMaxNumber){
+                        enemyFactory = new MobEnemyFactory();
+                        Mob_Enemy_List.add((MobEnemy) enemyFactory.createEnemy());
+                        Mobenemy_come_out_count = 0;
                     }
                     ForWard();
                     logic();
@@ -101,7 +114,6 @@ public class Game extends View{
     }
     private void shoot(){
         Hero_bullet_List.addAll(heroAircraft.shoot());
-        System.out.println(Hero_bullet_List);
     }
     private void logic(){
         y1 += 10;
@@ -132,7 +144,7 @@ public class Game extends View{
         /*
         敌机绘制
          */
-        //TODO
+        Draw_enemy.Draw_Mobenemy(Mob_Enemy_List,canvas);
     }
     private void Hero_Bullet_Forward(){
         for(BaseBullet HeroBullet:Hero_bullet_List){
@@ -140,12 +152,15 @@ public class Game extends View{
         }
     }
     private void Enemy_Forward(){
-
+        for(MobEnemy mobenemy:Mob_Enemy_List){
+            mobenemy.forwards();
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void postProcessAction() {
         Hero_bullet_List.removeIf(AbstractFlyingObject::notValid);
+        Mob_Enemy_List.removeIf(AbstractFlyingObject::notValid);
     }
 
 }

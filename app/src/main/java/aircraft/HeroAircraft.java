@@ -48,8 +48,4 @@ public class HeroAircraft extends AbstractAircraft {
     }
 
 
-    @Override
-    public Bitmap Get_Image() {
-        return HEROAIRCRAFT_IMAGE;
-    }
 }

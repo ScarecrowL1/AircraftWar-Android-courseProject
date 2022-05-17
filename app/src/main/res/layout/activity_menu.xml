@@ -8,13 +8,14 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="517dp"
-        android:layout_height="889dp"
+        android:layout_width="1159dp"
+        android:layout_height="1485dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.579"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/background" />
+        app:srcCompat="@mipmap/kobe" />
 
     <Button
         android:id="@+id/easyButton"

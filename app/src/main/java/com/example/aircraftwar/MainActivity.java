@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         height = getScreenRealHeight(this);
         StateHeight = getStatusBarHeight();
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide(); //隐藏标签栏，不然会弹出来
         setContentView(R.layout.activity_main);
     }
     @Override

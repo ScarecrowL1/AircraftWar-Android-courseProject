@@ -27,6 +27,7 @@ public class MenuActivity extends AppCompatActivity {
         Button casualButton = findViewById(R.id.casualButton);
         Button hardButton = findViewById(R.id.hardButton);
 
+        //简单按钮
         easyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,6 +37,7 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        //普通按钮
         casualButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,6 +47,7 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        //困难按钮
         hardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

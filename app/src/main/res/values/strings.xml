@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AircraftWar</string>
+    <string name="kunnan">困难</string>
+    <string name="putong">普通</string>
+    <string name="jiandan">简单</string>
+    <string name="yinxiao">音效</string>
 </resources>

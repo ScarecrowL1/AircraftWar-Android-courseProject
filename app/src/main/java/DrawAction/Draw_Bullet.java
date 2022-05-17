@@ -15,7 +15,7 @@ public class Draw_Bullet {
     public static void Draw_Hero_Bullet(List<BaseBullet> Bullet_List, Canvas canvas){
         heroAircraft = HeroAircraft.getInstance();
         for(BaseBullet baseBullet:Bullet_List){
-            canvas.drawBitmap(HERO_BULLET_IMAGE,baseBullet.getLocationX(),baseBullet.getLocationY()-HEROAIRCRAFT_IMAGE.getHeight()-HERO_BULLET_IMAGE.getHeight(),null);
+            canvas.drawBitmap(HERO_BULLET_IMAGE,baseBullet.getLocationX()-HERO_BULLET_IMAGE.getWidth()/2,baseBullet.getLocationY()-HERO_BULLET_IMAGE.getHeight(),null);
         }
     }
 }

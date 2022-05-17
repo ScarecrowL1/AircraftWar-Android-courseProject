@@ -1,5 +1,7 @@
 package bullet;
 
+import static com.example.aircraftwar.Image_Manage.HERO_BULLET_IMAGE;
+
 import com.example.aircraftwar.MainActivity;
 
 import basic.AbstractFlyingObject;
@@ -17,6 +19,7 @@ public class BaseBullet extends AbstractFlyingObject {
     public BaseBullet(int locationX, int locationY, int speedX, int speedY, int power) {
         super(locationX, locationY, speedX, speedY);
         this.power = power;
+        loadImage();
     }
 
     @Override
@@ -36,6 +39,11 @@ public class BaseBullet extends AbstractFlyingObject {
             // 向上飞行出界
             vanish();
         }
+    }
+
+    @Override
+    public void loadImage() {
+        image = HERO_BULLET_IMAGE;
     }
 
     public int getPower() {

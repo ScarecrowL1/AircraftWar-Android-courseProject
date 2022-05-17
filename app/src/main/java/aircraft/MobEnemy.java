@@ -1,5 +1,7 @@
 package aircraft;
 
+import static com.example.aircraftwar.Image_Manage.MOBENEMY_IMAGE;
+
 import com.example.aircraftwar.MainActivity;
 
 import bullet.BaseBullet;
@@ -17,6 +19,7 @@ public class MobEnemy extends Enemy {
 
     public MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
+        loadImage();
     }
 
     @Override
@@ -33,4 +36,8 @@ public class MobEnemy extends Enemy {
         return new LinkedList<>();
     }
 
+    @Override
+    public void loadImage() {
+        image = MOBENEMY_IMAGE;
+    }
 }

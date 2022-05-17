@@ -12,7 +12,7 @@ import aircraft.MobEnemy;
 public class Draw_enemy {
     public static void Draw_Mobenemy(List<MobEnemy> Mob_Enemy_List, Canvas canvas){
         for(MobEnemy mobEnemy:Mob_Enemy_List){
-            canvas.drawBitmap(MOBENEMY_IMAGE,mobEnemy.getLocationX(),mobEnemy.getLocationY(),null);
+            canvas.drawBitmap(MOBENEMY_IMAGE,mobEnemy.getLocationX()-MOBENEMY_IMAGE.getWidth()/2,mobEnemy.getLocationY(),null);
         }
     }
 }

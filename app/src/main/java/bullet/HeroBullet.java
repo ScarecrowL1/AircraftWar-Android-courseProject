@@ -1,5 +1,7 @@
 package bullet;
 
+import static com.example.aircraftwar.Image_Manage.HERO_BULLET_IMAGE;
+
 /**
  * @Author hitsz
  */

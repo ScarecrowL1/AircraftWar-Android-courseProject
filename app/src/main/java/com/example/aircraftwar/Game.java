@@ -37,11 +37,6 @@ import factory.MobEnemyFactory;
  */
 
 public class Game extends View{
-    // 定义画笔
-    private Paint mPaint;
-    // 用于获取文字的宽和高
-    private Rect mRect;
-    // 计数值，每点击一次本控件，其值增加1
 
     private static int y1;
     private static int y2;
@@ -75,7 +70,7 @@ public class Game extends View{
                     }
                     count_shoot += 1;
                     Mobenemy_come_out_count += 1;
-                    if(count_shoot == 20){
+                    if(count_shoot == 30){
                         shoot();
                         count_shoot = 0;
                     }
@@ -84,6 +79,7 @@ public class Game extends View{
                         Mob_Enemy_List.add((MobEnemy) enemyFactory.createEnemy());
                         Mobenemy_come_out_count = 0;
                     }
+                    check_crash();
                     ForWard();
                     logic();
                     invalidate();
@@ -161,6 +157,36 @@ public class Game extends View{
     private void postProcessAction() {
         Hero_bullet_List.removeIf(AbstractFlyingObject::notValid);
         Mob_Enemy_List.removeIf(AbstractFlyingObject::notValid);
+    }
+
+    private void check_crash(){
+        /*
+        英雄机子弹击中敌人
+         */
+        for(BaseBullet heroBullet:Hero_bullet_List){
+            if(heroBullet.notValid()){
+                continue;
+            }
+            for(MobEnemy mobEnemy:Mob_Enemy_List){
+                if(mobEnemy.notValid()){
+                    continue;
+                }
+                if(mobEnemy.crash(heroBullet)){
+                    mobEnemy.decreaseHp(heroBullet.getPower());
+                    heroBullet.vanish();
+                }
+            }
+        }
+        /*
+        敌机子弹击中英雄机
+         */
+        //TODO
+
+
+        /*
+        飞行物体碰撞，包括敌机和英雄机，英雄机和道具等。
+         */
+
     }
 
 }

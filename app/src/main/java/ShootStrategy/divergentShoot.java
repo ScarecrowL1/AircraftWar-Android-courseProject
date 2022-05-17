@@ -1,5 +1,7 @@
 package ShootStrategy;
 
+import static com.example.aircraftwar.Image_Manage.HEROAIRCRAFT_IMAGE;
+
 import bullet.BaseBullet;
 import bullet.HeroBullet;
 
@@ -21,7 +23,7 @@ public class divergentShoot implements Strategy{
             // 子弹发射位置相对飞机位置向前偏移
             // 多个子弹横向分散
             int speedx = (mid-i)*Direction;
-            baseBullet = new HeroBullet(x, y, speedx, speedy, power);
+            baseBullet = new BaseBullet(x, y-HEROAIRCRAFT_IMAGE.getHeight(), speedx, speedy, power);
             res.add(baseBullet);
         }
         return res;

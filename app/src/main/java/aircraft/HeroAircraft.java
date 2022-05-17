@@ -1,6 +1,7 @@
 package aircraft;
 
 import static com.example.aircraftwar.Image_Manage.HEROAIRCRAFT_IMAGE;
+import static com.example.aircraftwar.Image_Manage.MOBENEMY_IMAGE;
 import static com.example.aircraftwar.MainActivity.StateHeight;
 
 import android.graphics.Bitmap;
@@ -13,14 +14,16 @@ import ShootStrategy.ShootContext;
 import ShootStrategy.Strategy;
 import ShootStrategy.straightShoot;
 import bullet.BaseBullet;
+import bullet.HeroBullet;
 
 public class HeroAircraft extends AbstractAircraft {
     private HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
+        loadImage();
     }
     /** 单例生成英雄机 */
     private static HeroAircraft instance = new HeroAircraft(
-            MainActivity.width / 2,
+            MainActivity.width / 2+50,
             MainActivity.height-StateHeight,
             0, 0, 1000);
     public static HeroAircraft getInstance(){
@@ -48,4 +51,8 @@ public class HeroAircraft extends AbstractAircraft {
     }
 
 
+    @Override
+    public void loadImage() {
+        image = HEROAIRCRAFT_IMAGE;
+    }
 }

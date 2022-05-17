@@ -100,19 +100,16 @@ public abstract class AbstractFlyingObject {
      */
 
     public boolean crash(AbstractFlyingObject abstractFlyingObject) {
-        // 缩放因子，用于控制 y轴方向区域范围
-        int factor = this instanceof AbstractAircraft ? 2 : 1;
-        int fFactor = abstractFlyingObject instanceof AbstractAircraft ? 2 : 1;
 
         int x = abstractFlyingObject.getLocationX();
         int y = abstractFlyingObject.getLocationY();
         int fWidth = abstractFlyingObject.getWidth();
         int fHeight = abstractFlyingObject.getHeight();
 
-        return x + (fWidth+this.getWidth())/2 > locationX
-                && x - (fWidth+this.getWidth())/2 < locationX
-                && y + ( fHeight/fFactor+this.getHeight()/factor )/2 > locationY
-                && y - ( fHeight/fFactor+this.getHeight()/factor )/2 < locationY;
+        return x + fWidth/2 > locationX-this.getWidth()/2
+                && x - fWidth/2 < locationX+this.getWidth()/2
+                && y + fHeight > locationY
+                && y - fHeight < locationY+this.getHeight();
     }
 
     public int getLocationX() {
@@ -132,14 +129,14 @@ public abstract class AbstractFlyingObject {
         return speedY;
     }
 
-    public Bitmap getImage() {
-        return image;
-    }
+    public abstract void loadImage();
 
     public int getWidth() {
         if (width == -1){
             // 若未设置，则查询图片宽度并设置
-            width = image.getWidth();
+            if(image != null) {
+                width = image.getWidth();
+            }
         }
         return width;
     }
@@ -147,7 +144,9 @@ public abstract class AbstractFlyingObject {
     public int getHeight() {
         if (height == -1){
             // 若未设置，则查询图片高度并设置
-            height = image.getHeight();
+            if(image != null) {
+                height = image.getHeight();
+            }
         }
         return height;
     }

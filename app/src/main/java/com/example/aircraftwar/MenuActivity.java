@@ -34,6 +34,7 @@ public class MenuActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(MenuActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -44,6 +45,7 @@ public class MenuActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(MenuActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -54,6 +56,7 @@ public class MenuActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(MenuActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

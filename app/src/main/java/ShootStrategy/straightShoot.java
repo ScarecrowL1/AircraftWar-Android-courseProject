@@ -24,7 +24,7 @@ public class straightShoot implements Strategy{
         for(int i=0; i<shootnum; i++){
             // 子弹发射位置相对飞机位置向前偏移
             // 多个子弹横向分散
-            baseBullet = new HeroBullet(x + (i*2 - shootnum + 1)*10, y, speedx, speedy, power);
+            baseBullet = new BaseBullet(x, y, speedx, speedy, power);
             res.add(baseBullet);
         }
         return res;

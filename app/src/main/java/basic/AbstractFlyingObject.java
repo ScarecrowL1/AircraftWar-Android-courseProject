@@ -101,15 +101,18 @@ public abstract class AbstractFlyingObject {
 
     public boolean crash(AbstractFlyingObject abstractFlyingObject) {
 
+        int factor = this instanceof AbstractAircraft ? 2 : 1;
+        int fFactor = abstractFlyingObject instanceof AbstractAircraft ? 2 : 1;
+
         int x = abstractFlyingObject.getLocationX();
         int y = abstractFlyingObject.getLocationY();
         int fWidth = abstractFlyingObject.getWidth();
         int fHeight = abstractFlyingObject.getHeight();
 
-        return x + fWidth/2 > locationX-this.getWidth()/2
-                && x - fWidth/2 < locationX+this.getWidth()/2
-                && y + fHeight > locationY
-                && y - fHeight < locationY+this.getHeight();
+        return x + (fWidth+this.getWidth())/2 > locationX
+                && x - (fWidth+this.getWidth())/2 < locationX
+                && y + ( fHeight/fFactor+this.getHeight()/factor )/2 > locationY
+                && y - ( fHeight/fFactor+this.getHeight()/factor )/2 < locationY;
     }
 
     public int getLocationX() {
@@ -130,6 +133,12 @@ public abstract class AbstractFlyingObject {
     }
 
     public abstract void loadImage();
+    public Bitmap getImage(){
+        if(image != null) {
+            return image;
+        }
+        return null;
+    }
 
     public int getWidth() {
         if (width == -1){

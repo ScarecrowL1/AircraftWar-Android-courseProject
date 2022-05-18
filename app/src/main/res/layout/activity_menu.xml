@@ -8,14 +8,16 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="1159dp"
-        android:layout_height="1485dp"
+        android:layout_width="1491dp"
+        android:layout_height="1741dp"
+        android:contentDescription="backgrond"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.579"
+        app:layout_constraintHorizontal_bias="0.449"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/kobe" />
+        app:layout_constraintVertical_bias="0.48"
+        app:srcCompat="@mipmap/aircraft" />
 
     <Button
         android:id="@+id/easyButton"

@@ -17,12 +17,12 @@ public class divergentShoot implements Strategy{
         int power = 30;
         List<BaseBullet> res = new LinkedList<>();
         int mid = (shootnum-1)/2;
-        int speedy = speedY+Direction*10;
+        int speedy = speedY+Direction*15;
         BaseBullet baseBullet;
         for(int i=0; i<shootnum; i++){
             // 子弹发射位置相对飞机位置向前偏移
             // 多个子弹横向分散
-            int speedx = (mid-i)*Direction;
+            int speedx = (mid-i)*Direction*3;
             baseBullet = new BaseBullet(x, y, speedx, speedy, power);
             res.add(baseBullet);
         }

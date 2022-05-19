@@ -16,6 +16,7 @@ public class Image_Manage extends View {
     public static Bitmap PROP_BLOOD_IMAGE;
     public static Bitmap PROP_BULLET_IMAGE;
     public static Bitmap PROP_BOMB_IMAGE;
+    public static Bitmap BOSS_ENEMY_IMAGE;
     public Image_Manage(Context context, AttributeSet attrs){
         super(context,attrs);
         init();
@@ -38,5 +39,7 @@ public class Image_Manage extends View {
         PROP_BULLET_IMAGE = Bitmap.createScaledBitmap(PROP_BULLET_IMAGE,100,100,true);
         PROP_BOMB_IMAGE = BitmapFactory.decodeResource(getResources(),R.mipmap.prop_bomb);
         PROP_BOMB_IMAGE = Bitmap.createScaledBitmap(PROP_BOMB_IMAGE,100,100,true);
+        BOSS_ENEMY_IMAGE = BitmapFactory.decodeResource(getResources(),R.mipmap.boss);
+        BOSS_ENEMY_IMAGE = Bitmap.createScaledBitmap(BOSS_ENEMY_IMAGE,500,500,true);
     }
 }

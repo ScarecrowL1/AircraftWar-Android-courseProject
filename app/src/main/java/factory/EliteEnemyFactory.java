@@ -18,17 +18,17 @@ public class EliteEnemyFactory implements EnemyFactory {
                 2,
                 (int)(method.hp_of_exenmy()*ratio_of_ability)
         );*/
-        /*return new EliteEnemy(
+        return new EliteEnemy(
                 (int) (Math.random() * (MainActivity.width - ELITE_ENEMY_IMAGE.getWidth()/2)) * 1,
                 (int) (Math.random() * MainActivity.height * 0.1) * 1,
                 0,
-                20,
-                (int) 60);*/
-        return new EliteEnemy(
+                8,
+                (int) 60);
+        /*return new EliteEnemy(
                 MainActivity.width/2,
                 (int) (Math.random() * MainActivity.height * 0.1) * 1,
                 0,
                 5,
-                (int) 60);
+                (int) 60);*/
     }
 }

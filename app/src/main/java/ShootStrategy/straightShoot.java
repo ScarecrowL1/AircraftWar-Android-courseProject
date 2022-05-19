@@ -19,7 +19,7 @@ public class straightShoot implements Strategy{
         List<BaseBullet> res = new LinkedList<>();
 
         int speedx = 0;
-        int speedy = speedY+direction*10;
+        int speedy = speedY+direction*15;
         BaseBullet baseBullet;
         for(int i=0; i<shootnum; i++){
             // 子弹发射位置相对飞机位置向前偏移

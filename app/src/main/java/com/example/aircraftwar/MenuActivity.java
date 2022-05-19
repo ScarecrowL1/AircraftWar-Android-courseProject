@@ -76,4 +76,9 @@ public class MenuActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
     }
+
+    public void finishReback(View v){
+        startActivity(new Intent().setClass(MenuActivity.this, singgleOrMuti.class));
+        finish();
+    }
 }

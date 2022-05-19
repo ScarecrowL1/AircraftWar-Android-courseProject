@@ -2,7 +2,10 @@ package com.example.aircraftwar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,7 +13,9 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,6 +26,15 @@ public class MainActivity extends AppCompatActivity {
     public static int width;
     public static int height;
     public static int StateHeight;
+
+    private Intent intent;
+    private Connect conn;
+
+    /**
+     * 我粘结剂
+     */
+    public static MusicService.MyBinder myBinder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         WindowManager manager = this.getWindowManager();
@@ -29,9 +43,16 @@ public class MainActivity extends AppCompatActivity {
         width = outMetrics.widthPixels;
         height = getScreenRealHeight(this);
         StateHeight = getStatusBarHeight();
+
         super.onCreate(savedInstanceState);
+
         getSupportActionBar().hide(); //隐藏标签栏，不然会弹出来
         setContentView(R.layout.activity_main);
+
+        conn = new Connect();
+        intent = new Intent(this, MusicService.class);
+        bindService(intent, conn, Context.BIND_AUTO_CREATE);
+
     }
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -47,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
     }
+
     public static int getScreenRealHeight(Context context) {
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         final Display display = windowManager.getDefaultDisplay();
@@ -79,4 +101,32 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Log.i("main_activity","stop");
+        unbindService(conn);
+    }
+
+
+    /**
+     * 用于音乐播放
+     *
+     * @author ScarecrowLi
+     * @date 2022/05/19
+     */
+    class Connect implements ServiceConnection {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.i("main_activity", "Service Connected");
+            myBinder = (MusicService.MyBinder) service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+
+        }
+    }
+
 }

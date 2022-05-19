@@ -7,6 +7,7 @@ import static com.example.aircraftwar.Image_Manage.HEROAIRCRAFT_IMAGE;
 import static com.example.aircraftwar.MainActivity.StateHeight;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -72,6 +73,7 @@ public class Game extends View{
     private List<Prop> Prop_List;
     private List<BossEnemy> Boss_Enemy_List;
 
+
     public Game(Context context, AttributeSet attrs) {
 
         super(context, attrs);
@@ -86,6 +88,7 @@ public class Game extends View{
         y1 = 0;
         y2 = y1-MainActivity.height;
         heroAircraft = HeroAircraft.getInstance();
+
         setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent e) {
@@ -248,6 +251,9 @@ public class Game extends View{
                     continue;
                 }
                 if(mobEnemy.crash(heroBullet)){
+                    //受击音效
+                    MainActivity.myBinder.playBullet();
+
                     mobEnemy.decreaseHp(heroBullet.getPower());
                     heroBullet.vanish();
                     if(mobEnemy.notValid()){
@@ -267,6 +273,9 @@ public class Game extends View{
                     continue;
                 }
                 if(eliteEnemy.crash(heroBullet)){
+                    //受击音效
+                    MainActivity.myBinder.playBullet();
+
                     eliteEnemy.decreaseHp(heroBullet.getPower());
                     heroBullet.vanish();
                     if(eliteEnemy.notValid()){
@@ -308,6 +317,8 @@ public class Game extends View{
                     continue;
                 }
                 if(bossEnemy.crash(heroBullet)){
+                    //受击音效
+                    MainActivity.myBinder.playBullet();
                     bossEnemy.decreaseHp(heroBullet.getPower());
                     heroBullet.vanish();
                     if(bossEnemy.notValid()){

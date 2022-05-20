@@ -21,6 +21,8 @@ import android.view.View;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.aircraftwar.ui.login.Fire_Supply_Thread;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,10 +30,13 @@ import DrawAction.Draw_Bullet;
 import DrawAction.Draw_Prop;
 import DrawAction.Draw_enemy;
 import aircraft.AbstractAircraft;
+import aircraft.BombSupply;
 import aircraft.BossEnemy;
 import aircraft.EliteEnemy;
 import aircraft.Enemy;
+import aircraft.FireSupply;
 import aircraft.HeroAircraft;
+import aircraft.Hpup;
 import aircraft.MobEnemy;
 import aircraft.Prop;
 import basic.AbstractFlyingObject;
@@ -60,7 +65,7 @@ public class Game extends View{
     private static int mobenemyMaxNumber = 5;
     private static int EliteEnemy_come_out_count = 0;
     private static int Boss_Come_out_Limit = 20;
-    private static int Score;
+    public static int Score = 0;
     private static int Boss_Come_out_Count = 0;
     private static int eliteenemyMaxNumber = 1;
     private static int bossenemyMaxNumber = 1;
@@ -72,12 +77,14 @@ public class Game extends View{
     private HeroAircraft heroAircraft;
     private List<Prop> Prop_List;
     private List<BossEnemy> Boss_Enemy_List;
+    private List<AbstractFlyingObject> abstractFlyingObjects;
+    private static Fire_Supply_Thread fire_supply_thread = null;
 
 
     public Game(Context context, AttributeSet attrs) {
 
         super(context, attrs);
-        Score = 0;
+        abstractFlyingObjects = new LinkedList<>();
         Boss_Enemy_List = new LinkedList<>();
         Prop_List = new LinkedList<>();
         Enemy_bullet_List = new LinkedList<>();
@@ -116,14 +123,18 @@ public class Game extends View{
                     if(Mobenemy_come_out_count == 20){
                         if(Mob_Enemy_List.size()<=mobenemyMaxNumber) {
                             EnemyFactory enemyFactory = new MobEnemyFactory();
-                            Mob_Enemy_List.add((MobEnemy) enemyFactory.createEnemy());
+                            Enemy enemy = enemyFactory.createEnemy();
+                            Mob_Enemy_List.add((MobEnemy) enemy);
+                            abstractFlyingObjects.add((AbstractFlyingObject) enemy);
                         }
                         Mobenemy_come_out_count = 0;
                     }
                     if(EliteEnemy_come_out_count == 50){
                         if(Elite_Enemy_List.size()<1){
                             EnemyFactory enemyFactory = new EliteEnemyFactory();
-                            Elite_Enemy_List.add((EliteEnemy) enemyFactory.createEnemy());
+                            Enemy enemy = enemyFactory.createEnemy();
+                            abstractFlyingObjects.add((AbstractFlyingObject) enemy);
+                            Elite_Enemy_List.add((EliteEnemy) enemy);
                         }
                         EliteEnemy_come_out_count = 0;
                     }
@@ -150,10 +161,14 @@ public class Game extends View{
     private void shoot(){
         Hero_bullet_List.addAll(heroAircraft.shoot());
         for(EliteEnemy eliteEnemy:Elite_Enemy_List){
-            Enemy_bullet_List.addAll(eliteEnemy.shoot());
+            List<BaseBullet> shoot_list = eliteEnemy.shoot();
+            Enemy_bullet_List.addAll(shoot_list);
+            abstractFlyingObjects.addAll(shoot_list);
         }
         for(BossEnemy bossEnemy:Boss_Enemy_List){
-            Enemy_bullet_List.addAll(bossEnemy.shoot());
+            List<BaseBullet> shoot_list = bossEnemy.shoot();
+            Enemy_bullet_List.addAll(shoot_list);
+            abstractFlyingObjects.addAll(shoot_list);
         }
     }
     private void logic(){
@@ -345,7 +360,19 @@ public class Game extends View{
                 continue;
             }
             if(prop.crash(heroAircraft)){
-                System.out.println("Get Prop!");
+                if(prop instanceof Hpup){
+                    heroAircraft.decreaseHp(-20);
+                }
+                if(prop instanceof FireSupply){
+                    //火力道具生效10S
+                    if(fire_supply_thread == null || !fire_supply_thread.isAlive()){
+                        fire_supply_thread = new Fire_Supply_Thread();
+                        fire_supply_thread.start();
+                    }
+                }
+                if(prop instanceof BombSupply){
+                    new Explosion().explosion_happend(abstractFlyingObjects);
+                }
                 prop.vanish();
             }
         }

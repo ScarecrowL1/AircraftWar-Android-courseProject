@@ -1,6 +1,8 @@
 package factory;
 
+import static com.example.aircraftwar.Game.ratio_of_ability;
 import static com.example.aircraftwar.Image_Manage.MOBENEMY_IMAGE;
+import static com.example.aircraftwar.MenuActivity.level;
 
 import aircraft.MobEnemy;
 
@@ -19,8 +21,8 @@ public class MobEnemyFactory implements EnemyFactory {
                 (int) (Math.random() * (MainActivity.width - MOBENEMY_IMAGE.getWidth()/2)) * 1,
                 (int) (Math.random() * MainActivity.height * 0.1) * 1,
                 0,
-                20,
-                (int) 30);
+                10,
+                (int) (level.hp_of_enemy()*ratio_of_ability));
 
     }
 }

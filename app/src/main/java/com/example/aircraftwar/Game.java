@@ -5,6 +5,7 @@ import static com.example.aircraftwar.Image_Manage.BOSS_ENEMY_IMAGE;
 import static com.example.aircraftwar.Image_Manage.ELITE_ENEMY_IMAGE;
 import static com.example.aircraftwar.Image_Manage.HEROAIRCRAFT_IMAGE;
 import static com.example.aircraftwar.MainActivity.StateHeight;
+import static com.example.aircraftwar.MenuActivity.level;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +27,7 @@ import com.example.aircraftwar.ui.login.Fire_Supply_Thread;
 import java.util.LinkedList;
 import java.util.List;
 
+import game_difficulty_method.hard_difficulty;
 import DrawAction.Draw_Bullet;
 import DrawAction.Draw_Prop;
 import DrawAction.Draw_enemy;
@@ -60,15 +62,19 @@ public class Game extends View{
     private static int y1;
     private static int y2;
 
+    public static double ratio_of_ability = 1;
+    private static int temp = 0;
+    private static int Enemy_come_out_limit = level.enemy_come_out_time();
+    private static volatile int increase_enemy_ability_count = 0;
     private static int count_shoot = 0;
     private static int Mobenemy_come_out_count = 0;
-    private static int mobenemyMaxNumber = 5;
+    private static int mobenemyMaxNumber = level.size_of_total_mobenemy();
     private static int EliteEnemy_come_out_count = 0;
-    private static int Boss_Come_out_Limit = 20;
+    private static int Boss_Come_out_Limit = level.limit_of_boss_come_out();
     public static int Score = 0;
     private static int Boss_Come_out_Count = 0;
-    private static int eliteenemyMaxNumber = 1;
-    private static int bossenemyMaxNumber = 1;
+    private static int eliteenemyMaxNumber = level.size_of_total_exenemy();
+    private static int bossenemyMaxNumber = level.size_of_total_boss();
 
     private List<MobEnemy> Mob_Enemy_List;
     private List<BaseBullet> Hero_bullet_List;
@@ -116,12 +122,13 @@ public class Game extends View{
                     count_shoot += 1;
                     Mobenemy_come_out_count += 1;
                     EliteEnemy_come_out_count += 1;
+                    increase_enemy_ability_count += 1;
                     if(count_shoot == 30){
                         shoot();
                         count_shoot = 0;
                     }
-                    if(Mobenemy_come_out_count == 20){
-                        if(Mob_Enemy_List.size()<=mobenemyMaxNumber) {
+                    if(Mobenemy_come_out_count >= Enemy_come_out_limit*1000/30){
+                        if(Mob_Enemy_List.size() < mobenemyMaxNumber) {
                             EnemyFactory enemyFactory = new MobEnemyFactory();
                             Enemy enemy = enemyFactory.createEnemy();
                             Mob_Enemy_List.add((MobEnemy) enemy);
@@ -129,8 +136,8 @@ public class Game extends View{
                         }
                         Mobenemy_come_out_count = 0;
                     }
-                    if(EliteEnemy_come_out_count == 50){
-                        if(Elite_Enemy_List.size()<1){
+                    if(EliteEnemy_come_out_count >= Enemy_come_out_limit*3*1000/30){
+                        if(Elite_Enemy_List.size()< eliteenemyMaxNumber){
                             EnemyFactory enemyFactory = new EliteEnemyFactory();
                             Enemy enemy = enemyFactory.createEnemy();
                             abstractFlyingObjects.add((AbstractFlyingObject) enemy);
@@ -142,6 +149,13 @@ public class Game extends View{
                         Boss_Come_out_Count = 0;
                         EnemyFactory enemyFactory = new BossFactory();
                         Boss_Enemy_List.add((BossEnemy) enemyFactory.createEnemy());
+                    }
+                    if(ratio_of_ability <= 1.5 && increase_enemy_ability_count >= 1000){
+                        if(level instanceof hard_difficulty){
+                            System.out.println("敌机属性增强！");
+                            ratio_of_ability += level.ratio_of_ability_increase();
+                        }
+                        increase_enemy_ability_count = 0;
                     }
                     check_crash();
                     ForWard();
@@ -158,6 +172,7 @@ public class Game extends View{
         Enemy_Forward();
         Prop_Forward();
     }
+
     private void shoot(){
         Hero_bullet_List.addAll(heroAircraft.shoot());
         for(EliteEnemy eliteEnemy:Elite_Enemy_List){
@@ -171,6 +186,7 @@ public class Game extends View{
             abstractFlyingObjects.addAll(shoot_list);
         }
     }
+
     private void logic(){
         y1 += 5;
         y2 += 5;
@@ -181,6 +197,7 @@ public class Game extends View{
             y2 = y1-MainActivity.height;
         }
     }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -219,6 +236,7 @@ public class Game extends View{
         canvas.drawText("分数:"+Score,0,50,paint);
         canvas.drawText("生命值:"+heroAircraft.getHp(),0,100,paint);
     }
+
     private void Bullet_Forward(){
         for(BaseBullet HeroBullet:Hero_bullet_List){
             HeroBullet.forward();
@@ -227,6 +245,7 @@ public class Game extends View{
             EnemyBullet.forward();
         }
     }
+
     private void Enemy_Forward(){
         for(MobEnemy mobenemy:Mob_Enemy_List){
             mobenemy.forwards();
@@ -238,6 +257,7 @@ public class Game extends View{
             bossEnemy.forwards();
         }
     }
+
     private void Prop_Forward(){
         for(Prop prop:Prop_List){
             prop.forwards();
@@ -250,7 +270,9 @@ public class Game extends View{
         Enemy_bullet_List.removeIf(AbstractFlyingObject::notValid);
         Mob_Enemy_List.removeIf(AbstractFlyingObject::notValid);
         Elite_Enemy_List.removeIf(AbstractFlyingObject::notValid);
+        Boss_Enemy_List.removeIf(AbstractFlyingObject::notValid);
         Prop_List.removeIf(AbstractFlyingObject::notValid);
+        abstractFlyingObjects.removeIf(AbstractFlyingObject::notValid);
     }
 
     private void check_crash(){
@@ -376,7 +398,7 @@ public class Game extends View{
                 prop.vanish();
             }
         }
-
     }
+
 
 }

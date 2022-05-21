@@ -1,10 +1,13 @@
 package factory;
 
+import static com.example.aircraftwar.Game.ratio_of_ability;
 import static com.example.aircraftwar.Image_Manage.BOSS_ENEMY_IMAGE;
 
 import aircraft.BossEnemy;
 
 import com.example.aircraftwar.MainActivity;
+
+import static com.example.aircraftwar.MenuActivity.level;
 
 public class BossFactory implements EnemyFactory {
 
@@ -15,6 +18,6 @@ public class BossFactory implements EnemyFactory {
                 (int) (Math.random() * MainActivity.height * 0.1)*1,
                 5,
                 0,
-                (int)(300));
+                (int)(level.hp_of_boss()*ratio_of_ability));
     }
 }

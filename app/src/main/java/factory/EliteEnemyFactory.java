@@ -1,6 +1,8 @@
 package factory;
 
+import static com.example.aircraftwar.Game.ratio_of_ability;
 import static com.example.aircraftwar.Image_Manage.ELITE_ENEMY_IMAGE;
+import static com.example.aircraftwar.MenuActivity.level;
 
 import aircraft.EliteEnemy;
 
@@ -23,7 +25,7 @@ public class EliteEnemyFactory implements EnemyFactory {
                 (int) (Math.random() * MainActivity.height * 0.1) * 1,
                 0,
                 8,
-                (int) 60);
+                (int) (level.hp_of_exenmy()*ratio_of_ability));
         /*return new EliteEnemy(
                 MainActivity.width/2,
                 (int) (Math.random() * MainActivity.height * 0.1) * 1,

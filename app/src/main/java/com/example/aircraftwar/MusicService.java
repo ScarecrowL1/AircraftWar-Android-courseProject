@@ -65,7 +65,6 @@ public class MusicService extends Service {
     //播放音乐
     public void playMusic(){
         if(player == null){
-
             player = MediaPlayer.create(this, R.raw.bgm);
             player.setLooping(true);
         }

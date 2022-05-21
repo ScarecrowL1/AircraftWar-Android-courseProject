@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import game_difficulty_method.*;
+
 /**
  * 菜单界面
  *
@@ -17,6 +19,7 @@ import android.widget.Button;
  * @date 2022/05/17
  */
 public class MenuActivity extends AppCompatActivity {
+    public static difficulty_method level = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class MenuActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(MenuActivity.this, MainActivity.class);
                 startActivity(intent);
+                level = new easy_difficulty();
                 finish();
             }
         });
@@ -45,6 +49,7 @@ public class MenuActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(MenuActivity.this, MainActivity.class);
                 startActivity(intent);
+                level = new normal_difficulty();
                 finish();
             }
         });
@@ -56,6 +61,7 @@ public class MenuActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(MenuActivity.this, MainActivity.class);
                 startActivity(intent);
+                level = new hard_difficulty();
                 finish();
             }
         });

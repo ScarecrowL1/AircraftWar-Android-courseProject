@@ -27,9 +27,10 @@ public class MusicService extends Service {
         super.onCreate();
 
         Log.i(TAG, "==== MusicService onCreate ===");
-        mSoundPool = new SoundPool(2, AudioManager.STREAM_SYSTEM, 5);
+        mSoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 5);
         soundID.put(1, mSoundPool.load(this, R.raw.bullet_hit, 1));
         soundID.put(2, mSoundPool.load(this, R.raw.game_over, 1));
+        soundID.put(3, mSoundPool.load(this, R.raw.get_supply, 1));
     }
 
     @Override
@@ -46,10 +47,6 @@ public class MusicService extends Service {
      */
     public class MyBinder extends Binder {
 
-
-        /**
-         * 打子弹
-         */
         public void playBullet(){
             mSoundPool.play(soundID.get(1), 1, 1, 0,0,1);
         }
@@ -57,6 +54,9 @@ public class MusicService extends Service {
         public void playGameOver(){
             mSoundPool.play(soundID.get(2), 1, 1, 0, 0, 1);
         }
+
+        public void playPropActive() { mSoundPool.play(soundID.get(3),1,1,0,0,1); }
+
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {

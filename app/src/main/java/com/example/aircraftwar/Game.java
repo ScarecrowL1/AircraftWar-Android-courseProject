@@ -382,6 +382,8 @@ public class Game extends View{
                 continue;
             }
             if(prop.crash(heroAircraft)){
+                //播放道具音效
+                MainActivity.myBinder.playPropActive();
                 if(prop instanceof Hpup){
                     heroAircraft.decreaseHp(-20);
                 }

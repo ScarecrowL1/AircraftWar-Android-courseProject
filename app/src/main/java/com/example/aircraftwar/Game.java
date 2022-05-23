@@ -15,6 +15,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.media.MediaExtractor;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -63,6 +65,8 @@ public class Game extends View{
     private static int y2;
 
     public static double ratio_of_ability = 1;
+    private static MediaPlayer bgm;
+    private static MediaPlayer boss_bgm;
     private static int temp = 0;
     private static int Enemy_come_out_limit = level.enemy_come_out_time();
     private static volatile int increase_enemy_ability_count = 0;
@@ -162,9 +166,38 @@ public class Game extends View{
                     logic();
                     invalidate();
                     postProcessAction();
+                    play_bgm(context);
                 }
             }
         }.start();
+    }
+
+    private void play_bgm(Context context) {
+        bgm = BackGroundMusicService.getBgm();
+        boss_bgm = BackGroundMusicService.getBoss_bgm();
+        if(Boss_Enemy_List.size() == 0){
+            if(boss_bgm != null){
+                BackGroundMusicService.stop_boss_bgm();
+                BackGroundMusicService.play_bgm(context);
+            }
+            else{
+                if(bgm == null){
+                    BackGroundMusicService.play_bgm(context);
+                }
+            }
+        }
+        else{
+            if(bgm != null){
+                BackGroundMusicService.stop_bgm();
+                BackGroundMusicService.play_boss_bgm(context);
+            }
+            else{
+                if(boss_bgm == null){
+                    BackGroundMusicService.play_boss_bgm(context);
+                }
+            }
+        }
+
     }
 
     private void ForWard(){

@@ -35,7 +35,7 @@ public class MusicService extends Service {
 
     @Override
     public IBinder onBind(Intent intent){
-        playMusic();
+        //playMusic();
         return new MyBinder();
     }
 
@@ -62,6 +62,7 @@ public class MusicService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         return super.onStartCommand(intent, flags, startId);
     }
+
     //播放音乐
     public void playMusic(){
         if(player == null){

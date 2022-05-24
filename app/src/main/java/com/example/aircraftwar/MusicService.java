@@ -31,6 +31,7 @@ public class MusicService extends Service {
         soundID.put(1, mSoundPool.load(this, R.raw.bullet_hit, 1));
         soundID.put(2, mSoundPool.load(this, R.raw.game_over, 1));
         soundID.put(3, mSoundPool.load(this, R.raw.get_supply, 1));
+        soundID.put(4, mSoundPool.load(this, R.raw.bomb_explosion, 1));
     }
 
     @Override
@@ -62,6 +63,12 @@ public class MusicService extends Service {
         public void playPropActive() {
             if (MenuActivity.soundOn) {
                 mSoundPool.play(soundID.get(3),1,1,0,0,1);
+            }
+        }
+
+        public void playBomb() {
+            if (MenuActivity.soundOn) {
+                mSoundPool.play(soundID.get(4),1,1,0,0,1);
             }
         }
 

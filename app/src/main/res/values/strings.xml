@@ -18,4 +18,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="DanrenMoshi">单人模式</string>
     <string name="DuorenMoshi">多人模式</string>
+    <string name="title_activity_table">TableActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>

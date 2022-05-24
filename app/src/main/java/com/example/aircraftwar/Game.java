@@ -166,7 +166,11 @@ public class Game extends View{
                     logic();
                     invalidate();
                     postProcessAction();
-                    play_bgm(context);
+
+                    if (MenuActivity.soundOn) {
+                        play_bgm(context);
+                    }
+
                 }
             }
         }.start();
@@ -352,7 +356,7 @@ public class Game extends View{
                         //得分
                         Score += 30;
                         if(Boss_Enemy_List.size()<1){
-                            Boss_Come_out_Count += 30;
+                            Boss_Come_out_Count += 120;
                         }
                         //生成道具
                         int locationx = eliteEnemy.getLocationX();

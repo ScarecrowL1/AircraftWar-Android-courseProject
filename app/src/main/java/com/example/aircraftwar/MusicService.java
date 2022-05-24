@@ -48,14 +48,22 @@ public class MusicService extends Service {
     public class MyBinder extends Binder {
 
         public void playBullet(){
-            mSoundPool.play(soundID.get(1), 1, 1, 0,0,1);
+            if (MenuActivity.soundOn) {
+                mSoundPool.play(soundID.get(1), 1, 1, 0,0,1);
+            }
         }
 
         public void playGameOver(){
-            mSoundPool.play(soundID.get(2), 1, 1, 0, 0, 1);
+            if (MenuActivity.soundOn) {
+                mSoundPool.play(soundID.get(2), 1, 1, 0, 0, 1);
+            }
         }
 
-        public void playPropActive() { mSoundPool.play(soundID.get(3),1,1,0,0,1); }
+        public void playPropActive() {
+            if (MenuActivity.soundOn) {
+                mSoundPool.play(soundID.get(3),1,1,0,0,1);
+            }
+        }
 
     }
 

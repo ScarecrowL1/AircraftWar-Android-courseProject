@@ -30,9 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private Intent intent;
     private Connect conn;
 
-    /**
-     * 我粘结剂
-     */
     public static MusicService.MyBinder myBinder;
 
     @Override

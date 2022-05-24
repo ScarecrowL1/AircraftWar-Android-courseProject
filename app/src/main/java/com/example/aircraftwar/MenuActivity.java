@@ -1,6 +1,7 @@
 package com.example.aircraftwar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import game_difficulty_method.*;
 
@@ -21,6 +24,11 @@ import game_difficulty_method.*;
 public class MenuActivity extends AppCompatActivity {
     public static difficulty_method level = null;
 
+    /**
+     * 音效开关
+     */
+    public static boolean soundOn = true ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +37,8 @@ public class MenuActivity extends AppCompatActivity {
         Button easyButton = findViewById(R.id.easyButton);
         Button casualButton = findViewById(R.id.casualButton);
         Button hardButton = findViewById(R.id.hardButton);
+
+        Switch soundSwitch = findViewById(R.id.switch1);
 
         //简单按钮
         easyButton.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +73,13 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
                 level = new hard_difficulty();
                 finish();
+            }
+        });
+
+        soundSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                soundOn = isChecked;
             }
         });
 

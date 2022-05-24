@@ -22,6 +22,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
 public class MainActivity extends AppCompatActivity {
     public static int width;
     public static int height;
@@ -49,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         conn = new Connect();
         intent = new Intent(this, MusicService.class);
         bindService(intent, conn, Context.BIND_AUTO_CREATE);
+
     }
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

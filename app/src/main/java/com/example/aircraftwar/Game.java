@@ -55,7 +55,6 @@ public class Game extends View{
 
     private static int y1;
     private static int y2;
-
     public static double ratio_of_ability = 1;
     private static MediaPlayer bgm;
     private static MediaPlayer boss_bgm;
@@ -427,18 +426,20 @@ public class Game extends View{
             }
             if(prop.crash(heroAircraft)){
                 //播放道具音效
-                MainActivity.myBinder.playPropActive();
                 if(prop instanceof Hpup){
+                    MainActivity.myBinder.playPropActive();
                     heroAircraft.decreaseHp(-20);
                 }
                 if(prop instanceof FireSupply){
                     //火力道具生效10S
+                    MainActivity.myBinder.playPropActive();
                     if(fire_supply_thread == null || !fire_supply_thread.isAlive()){
                         fire_supply_thread = new Fire_Supply_Thread();
                         fire_supply_thread.start();
                     }
                 }
                 if(prop instanceof BombSupply){
+                    MainActivity.myBinder.playBomb();
                     new Explosion().explosion_happend(abstractFlyingObjects);
                 }
                 prop.vanish();

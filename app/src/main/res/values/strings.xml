@@ -21,4 +21,8 @@
     <string name="title_activity_table">TableActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="PaiHangBang">排行榜</string>
+    <string name="JianDan">简单</string>
+    <string name="PuTong">普通</string>
+    <string name="KunNan">困难</string>
 </resources>

@@ -19,19 +19,60 @@
             android:gravity="center"
             android:minHeight="?actionBarSize"
             android:padding="@dimen/appbar_padding"
-            android:text="排行榜"
+            android:text="@string/PaiHangBang"
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" >
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/JianDan" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/PuTong" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/KunNan" />
+        </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
+    <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/view_pager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </TableLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

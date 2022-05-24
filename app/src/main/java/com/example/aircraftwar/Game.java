@@ -5,6 +5,7 @@ import static com.example.aircraftwar.Image_Manage.HEROAIRCRAFT_IMAGE;
 import static com.example.aircraftwar.MenuActivity.level;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -70,6 +71,7 @@ public class Game extends View{
     private static int Boss_Come_out_Count = 0;
     private static int eliteenemyMaxNumber = level.size_of_total_exenemy();
     private static int bossenemyMaxNumber = level.size_of_total_boss();
+    public static boolean gameOverFlag = false;
 
     private List<MobEnemy> Mob_Enemy_List;
     private List<BaseBullet> Hero_bullet_List;
@@ -118,6 +120,7 @@ public class Game extends View{
                         }
                         MainActivity.myBinder.playGameOver();
                         Alive = false;
+                        gameOverFlag = true;
                         break;
                     }
                     try {

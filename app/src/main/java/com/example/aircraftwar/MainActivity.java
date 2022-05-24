@@ -1,5 +1,6 @@
 package com.example.aircraftwar;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ComponentName;
@@ -56,6 +57,19 @@ public class MainActivity extends AppCompatActivity {
         intent = new Intent(this, MusicService.class);
         bindService(intent, conn, Context.BIND_AUTO_CREATE);
 
+        Thread thread = new Thread() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void run() {
+                while (!Game.gameOverFlag) {
+                    continue;
+                }
+                Intent intent = new Intent().setClass(MainActivity.this, TableActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        };
+        thread.start();
     }
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -130,6 +144,10 @@ public class MainActivity extends AppCompatActivity {
         public void onServiceDisconnected(ComponentName componentName) {
 
         }
+    }
+
+    public void Turn(){
+        Intent intent = new Intent(this,TableActivity.class);
     }
 
 }

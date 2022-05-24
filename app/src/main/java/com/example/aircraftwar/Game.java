@@ -23,6 +23,7 @@ import java.net.Socket;
 import java.util.LinkedList;
 import java.util.List;
 
+import bullet.EnemyBullet;
 import game_difficulty_method.hard_difficulty;
 import DrawAction.Draw_Bullet;
 import DrawAction.Draw_Prop;
@@ -405,7 +406,18 @@ public class Game extends View{
         /*
         敌机子弹击中英雄机
          */
-        //TODO
+        //
+        for(BaseBullet enemyBullet:Enemy_bullet_List){
+            if(enemyBullet.notValid()){
+                continue;
+            }
+            else{
+                if(enemyBullet.crash(heroAircraft)){
+                    heroAircraft.decreaseHp(enemyBullet.getPower());
+                    enemyBullet.vanish();
+                }
+            }
+        }
 
 
         /*
@@ -413,6 +425,16 @@ public class Game extends View{
          */
         for(MobEnemy mobEnemy:Mob_Enemy_List){
             if(heroAircraft.crash(mobEnemy)){
+                heroAircraft.decreaseHp(heroAircraft.getHp());
+            }
+        }
+        for(EliteEnemy eliteEnemy:Elite_Enemy_List){
+            if(heroAircraft.crash(eliteEnemy)){
+                heroAircraft.decreaseHp(heroAircraft.getHp());
+            }
+        }
+        for(BossEnemy bossEnemy:Boss_Enemy_List){
+            if(heroAircraft.crash(bossEnemy)){
                 heroAircraft.decreaseHp(heroAircraft.getHp());
             }
         }

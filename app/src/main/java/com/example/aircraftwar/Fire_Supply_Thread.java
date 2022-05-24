@@ -1,4 +1,4 @@
-package com.example.aircraftwar.ui.login;
+package com.example.aircraftwar;
 
 import ShootStrategy.divergentShoot;
 import ShootStrategy.straightShoot;

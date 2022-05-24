@@ -1,21 +1,13 @@
 package com.example.aircraftwar;
 
 import static com.example.aircraftwar.Image_Manage.BACKGROUND_IMAGE;
-import static com.example.aircraftwar.Image_Manage.BOSS_ENEMY_IMAGE;
-import static com.example.aircraftwar.Image_Manage.ELITE_ENEMY_IMAGE;
 import static com.example.aircraftwar.Image_Manage.HEROAIRCRAFT_IMAGE;
-import static com.example.aircraftwar.MainActivity.StateHeight;
 import static com.example.aircraftwar.MenuActivity.level;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.media.MediaExtractor;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -24,8 +16,10 @@ import android.view.View;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.aircraftwar.ui.login.Fire_Supply_Thread;
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,7 +27,6 @@ import game_difficulty_method.hard_difficulty;
 import DrawAction.Draw_Bullet;
 import DrawAction.Draw_Prop;
 import DrawAction.Draw_enemy;
-import aircraft.AbstractAircraft;
 import aircraft.BombSupply;
 import aircraft.BossEnemy;
 import aircraft.EliteEnemy;
@@ -45,7 +38,6 @@ import aircraft.MobEnemy;
 import aircraft.Prop;
 import basic.AbstractFlyingObject;
 import bullet.BaseBullet;
-import bullet.HeroBullet;
 import factory.BombSupplyFactory;
 import factory.BossFactory;
 import factory.EliteEnemyFactory;
@@ -92,7 +84,6 @@ public class Game extends View{
 
 
     public Game(Context context, AttributeSet attrs) {
-
         super(context, attrs);
         abstractFlyingObjects = new LinkedList<>();
         Boss_Enemy_List = new LinkedList<>();
@@ -113,11 +104,23 @@ public class Game extends View{
                 return true;
             }
         });
-        new Thread(){
+        Thread thread = new Thread(){
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void run(){
-                while(true){
+                boolean Alive = true;
+                while(Alive){
+                    if(heroAircraft.getHp() <= 0){
+                        if(BackGroundMusicService.getBgm() != null){
+                            BackGroundMusicService.stop_bgm();
+                        }
+                        if(BackGroundMusicService.getBoss_bgm() != null){
+                            BackGroundMusicService.stop_boss_bgm();
+                        }
+                        MainActivity.myBinder.playGameOver();
+                        Alive = false;
+                        break;
+                    }
                     try {
                         Thread.sleep(30);
                     } catch (InterruptedException e) {
@@ -166,14 +169,13 @@ public class Game extends View{
                     logic();
                     invalidate();
                     postProcessAction();
-
                     if (MenuActivity.soundOn) {
                         play_bgm(context);
                     }
-
                 }
             }
-        }.start();
+        };
+        thread.start();
     }
 
     private void play_bgm(Context context) {
@@ -410,6 +412,11 @@ public class Game extends View{
         /*
         飞行物体碰撞，包括敌机和英雄机，英雄机和道具等。
          */
+        for(MobEnemy mobEnemy:Mob_Enemy_List){
+            if(heroAircraft.crash(mobEnemy)){
+                heroAircraft.decreaseHp(heroAircraft.getHp());
+            }
+        }
 
         /*
         道具碰撞检测

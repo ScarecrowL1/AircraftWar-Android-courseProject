@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         conn = new Connect();
         intent = new Intent(this, MusicService.class);
         bindService(intent, conn, Context.BIND_AUTO_CREATE);
-
     }
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

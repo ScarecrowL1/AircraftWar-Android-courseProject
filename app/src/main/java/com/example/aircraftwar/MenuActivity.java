@@ -11,7 +11,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.Switch;
+
+import com.example.aircraftwar.DataDAO.DAO;
+import com.example.aircraftwar.DataDAO.DAOImpl;
 
 import game_difficulty_method.*;
 
@@ -28,6 +32,7 @@ public class MenuActivity extends AppCompatActivity {
      * 音效开关
      */
     public static boolean soundOn = true ;
+    public static int gameModeInt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,7 @@ public class MenuActivity extends AppCompatActivity {
                 intent.setClass(MenuActivity.this, MainActivity.class);
                 startActivity(intent);
                 level = new easy_difficulty();
+                gameModeInt = 0;
                 finish();
             }
         });
@@ -60,6 +66,7 @@ public class MenuActivity extends AppCompatActivity {
                 intent.setClass(MenuActivity.this, MainActivity.class);
                 startActivity(intent);
                 level = new normal_difficulty();
+                gameModeInt = 1;
                 finish();
             }
         });
@@ -72,6 +79,7 @@ public class MenuActivity extends AppCompatActivity {
                 intent.setClass(MenuActivity.this, MainActivity.class);
                 startActivity(intent);
                 level = new hard_difficulty();
+                gameModeInt = 2;
                 finish();
             }
         });
@@ -82,8 +90,6 @@ public class MenuActivity extends AppCompatActivity {
                 soundOn = isChecked;
             }
         });
-
-
     }
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

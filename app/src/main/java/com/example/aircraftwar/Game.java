@@ -2,6 +2,7 @@ package com.example.aircraftwar;
 
 import static com.example.aircraftwar.Image_Manage.BACKGROUND_IMAGE;
 import static com.example.aircraftwar.Image_Manage.HEROAIRCRAFT_IMAGE;
+import static com.example.aircraftwar.MenuActivity.gameModeInt;
 import static com.example.aircraftwar.MenuActivity.level;
 
 import android.content.Context;
@@ -16,6 +17,9 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.RequiresApi;
+
+import com.example.aircraftwar.DataDAO.DAO;
+import com.example.aircraftwar.DataDAO.DAOImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -122,6 +126,8 @@ public class Game extends View{
                         MainActivity.myBinder.playGameOver();
                         Alive = false;
                         gameOverFlag = true;
+                        //记录本次数据（单人）
+                        saveData();
                         break;
                     }
                     try {
@@ -472,5 +478,12 @@ public class Game extends View{
         }
     }
 
+    public void saveData(){
+        DAO dao = new DAOImpl();
+        dao.doRead(gameModeInt);
+        dao.doAdd(Score, 1000, "testID");
+        dao.doRank();
+        dao.doSave(gameModeInt);
+    }
 
 }

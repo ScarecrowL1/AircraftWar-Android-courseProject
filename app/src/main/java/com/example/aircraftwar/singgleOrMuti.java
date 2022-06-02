@@ -23,6 +23,14 @@ public class singgleOrMuti extends AppCompatActivity {
                 finish();
             }
         });
+
+        //多人模式按钮
+        findViewById(R.id.mutiButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent().setClass(singgleOrMuti.this,MutiChooseActivity.class));
+            }
+        });
     }
 
     @Override

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.AircraftWar"
         tools:targetApi="31">
         <activity
+            android:name=".MutiChooseActivity"
+            android:exported="false" />
+        <activity
             android:name=".TableActivity"
             android:exported="false" />
 

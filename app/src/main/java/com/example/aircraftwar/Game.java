@@ -481,7 +481,7 @@ public class Game extends View{
     public void saveData(){
         DAO dao = new DAOImpl();
         dao.doRead(gameModeInt);
-        dao.doAdd(Score, 1000, "testID");
+        dao.doAdd(Score, 1000, LoginActivity.getUserID());
         dao.doRank();
         dao.doSave(gameModeInt);
     }

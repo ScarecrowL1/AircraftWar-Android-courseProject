@@ -31,10 +31,6 @@
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:exported="false"
-            android:label="@string/title_activity_login" />
-        <activity
             android:name=".MainActivity"
             android:exported="false" /> <!-- 将主活动改为菜单活动 -->
         <activity

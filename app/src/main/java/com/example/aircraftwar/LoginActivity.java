@@ -74,6 +74,8 @@ public class LoginActivity extends AppCompatActivity {
                                     toast.show();
                                     Looper.loop();
                                 }
+                                pw.close();
+                                socket.close();
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -124,11 +126,12 @@ public class LoginActivity extends AppCompatActivity {
                                                 Looper.loop();
                                             } else {
                                                 Looper.prepare();
-
                                                 Toast toast= Toast.makeText(LoginActivity.this, "注册成功！", Toast.LENGTH_SHORT);
                                                 toast.show();
                                                 Looper.loop();
                                             }
+                                            pw.close();
+                                            socket.close();
                                         } catch (IOException e) {
                                             e.printStackTrace();
                                         }

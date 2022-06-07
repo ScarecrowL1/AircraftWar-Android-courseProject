@@ -28,6 +28,8 @@ import java.net.Socket;
 import java.util.LinkedList;
 import java.util.List;
 
+import SocketServe.GetThread;
+import SocketServe.PostThread;
 import bullet.EnemyBullet;
 import game_difficulty_method.hard_difficulty;
 import DrawAction.Draw_Bullet;
@@ -110,6 +112,20 @@ public class Game extends View{
                 return true;
             }
         });
+        new Thread(){
+            {
+                try {
+                    Thread.sleep(1000);
+                    Socket socket = new Socket("120.77.59.99", 10000);
+                    new GetThread(socket).start();
+                    new PostThread(socket).start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
         Thread thread = new Thread(){
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override

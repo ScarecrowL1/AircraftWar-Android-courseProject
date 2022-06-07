@@ -113,15 +113,13 @@ public class Game extends View{
             }
         });
         new Thread(){
-            {
+            @Override
+            public void run() {
                 try {
-                    Thread.sleep(1000);
                     Socket socket = new Socket("120.77.59.99", 10000);
                     new GetThread(socket).start();
                     new PostThread(socket).start();
                 } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }

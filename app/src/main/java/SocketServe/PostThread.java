@@ -18,6 +18,7 @@ public class PostThread extends Thread{
             //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             PrintWriter pw = new PrintWriter(socket.getOutputStream());
             while(true){
+                Thread.sleep(1000);
                 //String str = br.readLine();
                 pw.println(Game.Score+"");
                 pw.flush();

@@ -16,6 +16,7 @@ public class GetThread extends Thread{
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             while(true){
+                Thread.sleep(1000);
                 String str = br.readLine();
                 Log.e("Score",str);
             }

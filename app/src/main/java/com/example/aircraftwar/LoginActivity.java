@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (response.equals("登陆成功")) {
                                     Looper.prepare();
                                     Toast toast= Toast.makeText(LoginActivity.this, "登录成功！", Toast.LENGTH_SHORT);
+                                    userID = user_name;
                                     toast.show();
                                     startActivity(new Intent().setClass(LoginActivity.this, singgleOrMuti.class));
                                     finish();

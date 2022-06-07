@@ -29,6 +29,9 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import SocketServe.GetThread;
+import SocketServe.PostThread;
+
 public class MainActivity extends AppCompatActivity {
     public static int width;
     public static int height;
@@ -56,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         conn = new Connect();
         intent = new Intent(this, MusicService.class);
         bindService(intent, conn, Context.BIND_AUTO_CREATE);
-
         Thread thread = new Thread() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override

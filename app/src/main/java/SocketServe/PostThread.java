@@ -1,5 +1,7 @@
 package SocketServe;
 
+import static com.example.aircraftwar.Game.gameOverFlag;
+
 import com.example.aircraftwar.Game;
 
 import java.io.BufferedReader;
@@ -17,7 +19,7 @@ public class PostThread extends Thread{
         try {
             //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             PrintWriter pw = new PrintWriter(socket.getOutputStream());
-            while(true){
+            while(true && gameOverFlag == false){
                 Thread.sleep(1000);
                 //String str = br.readLine();
                 pw.println(Game.Score+"");

@@ -1,5 +1,8 @@
 package SocketServe;
 
+import static com.example.aircraftwar.Game.Other_player_score;
+import static com.example.aircraftwar.Game.gameOverFlag;
+
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -15,10 +18,10 @@ public class GetThread extends Thread{
     public void run(){
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            while(true){
+            while(true && gameOverFlag == false){
                 Thread.sleep(1000);
                 String str = br.readLine();
-                Log.e("Score",str);
+                Other_player_score = str;
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block

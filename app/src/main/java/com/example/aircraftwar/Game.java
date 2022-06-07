@@ -79,6 +79,7 @@ public class Game extends View{
     private static int eliteenemyMaxNumber = level.size_of_total_exenemy();
     private static int bossenemyMaxNumber = level.size_of_total_boss();
     public static boolean gameOverFlag = false;
+    public static String Other_player_score = "";
 
     private List<MobEnemy> Mob_Enemy_List;
     private List<BaseBullet> Hero_bullet_List;
@@ -295,7 +296,8 @@ public class Game extends View{
         /*
         绘制生命值和分数
          */
-        canvas.drawText("分数:"+Score,0,50,paint);
+        canvas.drawText("我的分数:"+Score,0,50,paint);
+        canvas.drawText("对方分数:"+Other_player_score,50,50,paint);
         canvas.drawText("生命值:"+heroAircraft.getHp(),0,100,paint);
     }
 

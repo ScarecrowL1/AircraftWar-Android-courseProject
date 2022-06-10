@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -18,6 +19,7 @@ import java.net.Socket;
 
 import SocketServe.GetThread;
 import SocketServe.PostThread;
+import game_difficulty_method.easy_difficulty;
 
 public class WaitPreAcitivity extends AppCompatActivity {
     public static boolean preFlag = false;
@@ -79,11 +81,11 @@ public class WaitPreAcitivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(both_ready) {
+                if(!both_ready) {
                     ismuti = true;
                     wait_is_running = false;
                     game_is_running = true;
-                    Intent intent = new Intent().setClass(WaitPreAcitivity.this, MainActivity.class);
+                    Intent intent = new Intent().setClass(WaitPreAcitivity.this, MenuActivity.class);
                     startActivity(intent);
                     finish();
                 }

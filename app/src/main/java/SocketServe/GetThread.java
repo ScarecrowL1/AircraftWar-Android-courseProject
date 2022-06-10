@@ -2,6 +2,7 @@ package SocketServe;
 
 import static com.example.aircraftwar.Game.Other_player_score;
 import static com.example.aircraftwar.Game.gameOverFlag;
+import static com.example.aircraftwar.MenuActivity.level;
 import static com.example.aircraftwar.WaitPreAcitivity.game_is_running;
 import static com.example.aircraftwar.WaitPreAcitivity.is_ready;
 import static com.example.aircraftwar.WaitPreAcitivity.other_ready;
@@ -32,6 +33,7 @@ public class GetThread extends Thread{
                     }
                     continue;
                 }
+                while(level == null){}
                 if (!gameOverFlag) {
                         String str = br.readLine();
                         Other_player_score = str;

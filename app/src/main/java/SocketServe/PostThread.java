@@ -2,6 +2,7 @@ package SocketServe;
 
 import static com.example.aircraftwar.Game.Other_player_score;
 import static com.example.aircraftwar.Game.gameOverFlag;
+import static com.example.aircraftwar.MenuActivity.level;
 import static com.example.aircraftwar.WaitPreAcitivity.game_is_running;
 import static com.example.aircraftwar.WaitPreAcitivity.is_ready;
 import static com.example.aircraftwar.WaitPreAcitivity.ismuti;
@@ -31,10 +32,14 @@ public class PostThread extends Thread{
                 if(wait_is_running){
                     if (is_ready) {
                         pw.println("ready");
-                        pw.flush();
                     }
+                    else{
+                        pw.println("not ready");
+                    }
+                    pw.flush();
                     continue;
                 }
+                while(level == null){}
                 if (!gameOverFlag) {
                         pw.println(Game.Score+"");
                         pw.flush();

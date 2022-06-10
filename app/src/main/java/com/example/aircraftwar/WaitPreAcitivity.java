@@ -81,7 +81,7 @@ public class WaitPreAcitivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!both_ready) {
+                if(both_ready) {
                     ismuti = true;
                     wait_is_running = false;
                     game_is_running = true;

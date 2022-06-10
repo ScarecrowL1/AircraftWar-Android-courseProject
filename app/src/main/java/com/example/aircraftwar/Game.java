@@ -4,6 +4,7 @@ import static com.example.aircraftwar.Image_Manage.BACKGROUND_IMAGE;
 import static com.example.aircraftwar.Image_Manage.HEROAIRCRAFT_IMAGE;
 import static com.example.aircraftwar.MenuActivity.gameModeInt;
 import static com.example.aircraftwar.MenuActivity.level;
+import static com.example.aircraftwar.WaitPreAcitivity.ismuti;
 
 import android.content.Context;
 import android.content.Intent;
@@ -113,18 +114,20 @@ public class Game extends View{
                 return true;
             }
         });
-        new Thread(){
-            @Override
-            public void run() {
-                try {
-                    Socket socket = new Socket("120.77.59.99", 10000);
-                    new GetThread(socket).start();
-                    new PostThread(socket).start();
-                } catch (IOException e) {
-                    e.printStackTrace();
+        if (ismuti) {
+            new Thread(){
+                @Override
+                public void run() {
+                    try {
+                        Socket socket = new Socket("120.77.59.99", 10000);
+                        new GetThread(socket).start();
+                        new PostThread(socket).start();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        }.start();
+            }.start();
+        }
         Thread thread = new Thread(){
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -143,6 +146,7 @@ public class Game extends View{
                         gameOverFlag = true;
                         //记录本次数据（单人）
                         saveData();
+                        //断开连接
                         break;
                     }
                     try {
@@ -297,7 +301,9 @@ public class Game extends View{
         绘制生命值和分数
          */
         canvas.drawText("我的分数:"+Score,0,50,paint);
-        canvas.drawText("对方分数:"+Other_player_score,0,100,paint);
+        if (ismuti) {
+            canvas.drawText("对方分数:"+Other_player_score,0,100,paint);
+        }
         canvas.drawText("生命值:"+heroAircraft.getHp(),0,150,paint);
     }
 

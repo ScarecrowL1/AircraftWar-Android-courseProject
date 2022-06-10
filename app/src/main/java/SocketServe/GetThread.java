@@ -2,6 +2,11 @@ package SocketServe;
 
 import static com.example.aircraftwar.Game.Other_player_score;
 import static com.example.aircraftwar.Game.gameOverFlag;
+import static com.example.aircraftwar.WaitPreAcitivity.game_is_running;
+import static com.example.aircraftwar.WaitPreAcitivity.is_ready;
+import static com.example.aircraftwar.WaitPreAcitivity.other_ready;
+import static com.example.aircraftwar.WaitPreAcitivity.preFlag;
+import static com.example.aircraftwar.WaitPreAcitivity.wait_is_running;
 
 import android.util.Log;
 
@@ -18,11 +23,23 @@ public class GetThread extends Thread{
     public void run(){
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            while(true && gameOverFlag == false){
+            while(true){
                 Thread.sleep(1000);
-                String str = br.readLine();
-                Other_player_score = str;
+                if(wait_is_running){
+                    if (is_ready) {
+                        String str = br.readLine();
+                        other_ready = str.equals("ready");
+                    }
+                    continue;
+                }
+                if (!gameOverFlag) {
+                        String str = br.readLine();
+                        Other_player_score = str;
+                        continue;
+                }
+                break;
             }
+            socket.close();
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

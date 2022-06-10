@@ -10,7 +10,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 public class WaitPreAcitivity extends AppCompatActivity {
-    boolean preFlag;
+    boolean preFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +26,15 @@ public class WaitPreAcitivity extends AppCompatActivity {
         preSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                preFlag = isChecked;
+                //如果之前已经准备
                 if(preFlag){
-                    startButton.setEnabled(true);
+
                 }
+                //如果之前没有准备
                 else {
-                    startButton.setEnabled(false);
+
                 }
+                preFlag = isChecked;
             }
         });
 

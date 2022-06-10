@@ -3,6 +3,7 @@ package com.example.aircraftwar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -25,6 +26,7 @@ public class WaitPreAcitivity extends AppCompatActivity {
     public static boolean wait_is_running = true;
     public static boolean other_ready = false;
     public static boolean game_is_running = false;
+    static boolean both_ready = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,6 @@ public class WaitPreAcitivity extends AppCompatActivity {
         setContentView(R.layout.activity_wait_pre_acitivity);
         Switch preSwitch = findViewById(R.id.preSwitch);
         Button startButton = findViewById(R.id.startButton);
-        startButton.setEnabled(false);
 
         new Thread(){
             @Override
@@ -48,24 +49,22 @@ public class WaitPreAcitivity extends AppCompatActivity {
         }.start();
         new Thread(){
             @Override
-            public void run(){
-                while(true){
-                    if(is_ready && other_ready){
-                        startButton.setClickable(true);
-                    }
-                    else{
-                        startButton.setClickable(false);
+            public void run() {
+                while (true) {
+                    if (is_ready && other_ready) {
+                        both_ready = true;
+                    } else {
+                        both_ready = false;
                     }
                 }
             }
-        };
+        }.start();
         //点击准备按钮
         preSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //如果之前已经准备
                 if(preFlag){
-
                     is_ready = false;
                 }
                 //如果之前没有准备
@@ -80,9 +79,17 @@ public class WaitPreAcitivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ismuti = true;
-                wait_is_running = false;
-                game_is_running = true;
+                if(both_ready) {
+                    ismuti = true;
+                    wait_is_running = false;
+                    game_is_running = true;
+                    Intent intent = new Intent().setClass(WaitPreAcitivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else{
+                    Toast.makeText(WaitPreAcitivity.this,"对方未准备",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

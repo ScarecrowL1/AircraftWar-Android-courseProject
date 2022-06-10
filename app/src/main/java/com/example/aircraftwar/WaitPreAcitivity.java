@@ -30,8 +30,8 @@ public class WaitPreAcitivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wait_pre_acitivity);
-        Button startButton = findViewById(R.id.startButton);
         Switch preSwitch = findViewById(R.id.preSwitch);
+        Button startButton = findViewById(R.id.startButton);
         startButton.setEnabled(false);
 
         new Thread(){
@@ -46,24 +46,26 @@ public class WaitPreAcitivity extends AppCompatActivity {
                 }
             }
         }.start();
-        runOnUiThread(new Runnable() {
+        new Thread(){
             @Override
-            public void run() {
-                while (true) {
-                    if (is_ready && other_ready) {
-                        startButton.setEnabled(true);
-                    } else {
-                        startButton.setEnabled(false);
+            public void run(){
+                while(true){
+                    if(is_ready && other_ready){
+                        startButton.setClickable(true);
+                    }
+                    else{
+                        startButton.setClickable(false);
                     }
                 }
             }
-        });
+        };
         //点击准备按钮
         preSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //如果之前已经准备
                 if(preFlag){
+
                     is_ready = false;
                 }
                 //如果之前没有准备

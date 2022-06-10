@@ -2,7 +2,10 @@ package com.example.aircraftwar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -23,17 +26,14 @@ public class WaitPreAcitivity extends AppCompatActivity {
     public static boolean other_ready = false;
     public static boolean game_is_running = false;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wait_pre_acitivity);
-
         Button startButton = findViewById(R.id.startButton);
         Switch preSwitch = findViewById(R.id.preSwitch);
-
-
         startButton.setEnabled(false);
+
         new Thread(){
             @Override
             public void run() {
@@ -46,19 +46,18 @@ public class WaitPreAcitivity extends AppCompatActivity {
                 }
             }
         }.start();
-        new Thread(){
+        runOnUiThread(new Runnable() {
             @Override
-            public void run(){
-                while(true){
-                    if(is_ready && other_ready){
+            public void run() {
+                while (true) {
+                    if (is_ready && other_ready) {
                         startButton.setEnabled(true);
-                    }
-                    else{
+                    } else {
                         startButton.setEnabled(false);
                     }
                 }
             }
-        }.start();
+        });
         //点击准备按钮
         preSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -82,7 +81,6 @@ public class WaitPreAcitivity extends AppCompatActivity {
                 ismuti = true;
                 wait_is_running = false;
                 game_is_running = true;
-                Toast.makeText(WaitPreAcitivity.this, "准备成功", Toast.LENGTH_SHORT).show();
             }
         });
     }

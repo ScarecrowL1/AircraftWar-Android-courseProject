@@ -14,6 +14,7 @@ import android.graphics.Paint;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -79,7 +80,7 @@ public class Game extends View{
     private static int Boss_Come_out_Count = 0;
     private static int eliteenemyMaxNumber = level.size_of_total_exenemy();
     private static int bossenemyMaxNumber = level.size_of_total_boss();
-    public static boolean gameOverFlag = false;
+    public static volatile boolean gameOverFlag = false;
     public static String Other_player_score = "";
     public static String finally_score = "";
 
@@ -92,7 +93,7 @@ public class Game extends View{
     private List<BossEnemy> Boss_Enemy_List;
     private List<AbstractFlyingObject> abstractFlyingObjects;
     private static Fire_Supply_Thread fire_supply_thread = null;
-    public static boolean othergameOverFlag = false;
+    public static volatile boolean othergameOverFlag = false;
 
 
     public Game(Context context, AttributeSet attrs) {

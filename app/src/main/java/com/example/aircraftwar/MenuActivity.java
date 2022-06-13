@@ -57,7 +57,6 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
                 level = new easy_difficulty();
                 gameModeInt = 0;
-                BACKGROUND_IMAGE = BitmapFactory.decodeResource(getResources(),R.mipmap.easybg);
                 finish();
             }
         });
@@ -71,7 +70,6 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
                 level = new normal_difficulty();
                 gameModeInt = 1;
-                BACKGROUND_IMAGE = BitmapFactory.decodeResource(getResources(),R.mipmap.normalbg);
                 finish();
             }
         });
@@ -85,7 +83,6 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
                 level = new hard_difficulty();
                 gameModeInt = 2;
-                BACKGROUND_IMAGE = BitmapFactory.decodeResource(getResources(),R.mipmap.hardbg);
                 finish();
             }
         });

@@ -8,6 +8,7 @@ import static com.example.aircraftwar.WaitPreAcitivity.ismuti;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -33,6 +34,7 @@ import java.util.List;
 import SocketServe.GetThread;
 import SocketServe.PostThread;
 import bullet.EnemyBullet;
+import game_difficulty_method.easy_difficulty;
 import game_difficulty_method.hard_difficulty;
 import DrawAction.Draw_Bullet;
 import DrawAction.Draw_Prop;
@@ -56,6 +58,7 @@ import factory.FireSupplyFactory;
 import factory.HpupFactory;
 import factory.MobEnemyFactory;
 import factory.PropFactory;
+import game_difficulty_method.normal_difficulty;
 
 /**
  * Created by Administrator on 2017/10/19.
@@ -106,6 +109,15 @@ public class Game extends View{
         Mob_Enemy_List = new LinkedList<>();
         Hero_bullet_List = new LinkedList<>();
         Image_Manage image_manage = new Image_Manage(context,attrs);
+        if(level instanceof easy_difficulty){
+            BACKGROUND_IMAGE = BitmapFactory.decodeResource(getResources(),R.mipmap.easybg);
+        }
+        else if(level instanceof normal_difficulty){
+            BACKGROUND_IMAGE = BitmapFactory.decodeResource(getResources(),R.mipmap.normalbg);
+        }
+        else if(level instanceof hard_difficulty){
+            BACKGROUND_IMAGE = BitmapFactory.decodeResource(getResources(),R.mipmap.hardbg);
+        }
         y1 = 0;
         y2 = y1-MainActivity.height;
         heroAircraft = HeroAircraft.getInstance();

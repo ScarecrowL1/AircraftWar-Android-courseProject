@@ -22,7 +22,7 @@ public class Image_Manage extends View {
         init();
     }
     public void init(){
-        BACKGROUND_IMAGE = BitmapFactory.decodeResource(getResources(),R.mipmap.background);
+        BACKGROUND_IMAGE = BitmapFactory.decodeResource(getResources(),R.mipmap.easybg);
         HEROAIRCRAFT_IMAGE = BitmapFactory.decodeResource(getResources(),R.mipmap.hero);
         BACKGROUND_IMAGE = Bitmap.createScaledBitmap(BACKGROUND_IMAGE, MainActivity.width, MainActivity.height, true);
         HEROAIRCRAFT_IMAGE = Bitmap.createScaledBitmap(HEROAIRCRAFT_IMAGE,200,200,true);

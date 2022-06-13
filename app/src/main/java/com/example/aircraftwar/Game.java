@@ -114,7 +114,7 @@ public class Game extends View{
                 return true;
             }
         });
-        if (ismuti) {
+        /*if (ismuti) {
             new Thread(){
                 @Override
                 public void run() {
@@ -127,7 +127,7 @@ public class Game extends View{
                     }
                 }
             }.start();
-        }
+        }*/
         Thread thread = new Thread(){
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override

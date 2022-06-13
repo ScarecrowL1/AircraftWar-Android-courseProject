@@ -39,6 +39,7 @@ public class PostThread extends Thread{
                     pw.flush();
                     continue;
                 }
+                while(level == null){pw.flush();}
                 if (!gameOverFlag) {
                         pw.println(Game.Score+"");
                         pw.flush();
@@ -46,6 +47,7 @@ public class PostThread extends Thread{
                     }
                 break;
             }
+            pw.close();
             socket.close();
         } catch (Exception e) {
             // TODO Auto-generated catch block

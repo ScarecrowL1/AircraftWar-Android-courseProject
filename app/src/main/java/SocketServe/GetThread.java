@@ -33,6 +33,7 @@ public class GetThread extends Thread{
                     }
                     continue;
                 }
+                while(level == null){}
                 if (!gameOverFlag) {
                         String str = br.readLine();
                         Other_player_score = str;
@@ -40,6 +41,7 @@ public class GetThread extends Thread{
                 }
                 break;
             }
+            br.close();
             socket.close();
         } catch (Exception e) {
             // TODO Auto-generated catch block

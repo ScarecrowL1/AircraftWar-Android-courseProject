@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                                     toast.show();
                                     Looper.loop();
                                 }
+                                br.close();
                                 pw.close();
                                 socket.close();
                             } catch (IOException e) {
@@ -131,6 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 toast.show();
                                                 Looper.loop();
                                             }
+                                            br.close();
                                             pw.close();
                                             socket.close();
                                         } catch (IOException e) {

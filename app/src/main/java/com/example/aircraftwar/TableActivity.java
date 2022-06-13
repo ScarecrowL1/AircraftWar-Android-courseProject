@@ -44,11 +44,7 @@ public class TableActivity extends AppCompatActivity {
         }
 
 
-        //4、创建适配器 连接数据源和控件的桥梁
-        //参数 1：当前的上下文环境
-        //参数 2：当前列表项所加载的布局文件
-        //(android.R.layout.simple_list_item_1)这里的布局文件是Android内置的，里面只有一个textview控件用来显示简单的文本内容
-        //参数 3：数据源
+
         ArrayAdapter<String> adapter=new ArrayAdapter<>(TableActivity.this,android.R.layout.simple_list_item_1,dataList);
         listView.setAdapter(adapter);
         listView.setOnTouchListener(new View.OnTouchListener() {

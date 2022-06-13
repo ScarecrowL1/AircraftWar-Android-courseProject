@@ -66,7 +66,12 @@ public class MainActivity extends AppCompatActivity {
                 while (!Game.gameOverFlag) {
                     continue;
                 }
+
                 Intent intent = new Intent().setClass(MainActivity.this, TableActivity.class);
+
+                if(WaitPreAcitivity.ismuti){
+                    intent = new Intent().setClass(MainActivity.this, MultiEndActivity.class);
+                }
                 startActivity(intent);
                 finish();
             }

@@ -18,19 +18,6 @@ public class WaitDieActivity extends AppCompatActivity {
         new Thread(){
             @Override
             public void run(){
-                while (true) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    Log.e("123",""+othergameOverFlag);
-                }
-            }
-        }.start();
-        new Thread(){
-            @Override
-            public void run(){
                 while (true){
                     if(Game.gameOverFlag && othergameOverFlag){
                         Intent intent = new Intent().setClass(WaitDieActivity.this, MultiEndActivity.class);

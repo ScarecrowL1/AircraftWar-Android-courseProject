@@ -43,8 +43,8 @@ public class GetThread extends Thread{
                         String str = br.readLine();
                         if(str.equals("gameover")){
                             othergameOverFlag = true;
+                            Other_player_score = br.readLine();
                             finally_score = Other_player_score;
-                            Log.e("1111", Game.othergameOverFlag+"");
                         }
                         Other_player_score = str;
                         continue;

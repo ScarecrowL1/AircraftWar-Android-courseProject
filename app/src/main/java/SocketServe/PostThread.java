@@ -48,6 +48,7 @@ public class PostThread extends Thread{
                 }
                 if(gameOverFlag){
                     pw.println("gameover");
+                    pw.println(Game.Score+"");
                     pw.flush();
                 }
                 while(!othergameOverFlag){}

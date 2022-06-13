@@ -38,13 +38,22 @@ public class WaitPreAcitivity extends AppCompatActivity {
         Switch preSwitch = findViewById(R.id.preSwitch);
         Button startButton = findViewById(R.id.startButton);
 
-        /*startButton.setEnabled(false);
-        runOnUiThread(new Runnable() {
+        startButton.setEnabled(false);
+
+        @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
             @Override
-            public void run() {
-                startButton.setEnabled(both_ready);
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if (msg.what == 0x11) {
+                    startButton.setEnabled(true);
+                }
+                if (msg.what == 0x12) {
+                    startButton.setEnabled(false);
+                }
             }
-        });*/
+        };
+
+
 
         new Thread(){
             @Override
@@ -59,12 +68,31 @@ public class WaitPreAcitivity extends AppCompatActivity {
             }
         }.start();
         new Thread(){
+            boolean did = false;
+            boolean preIsReady;
+            boolean preOtherReady;
+            boolean isChanged;
             @Override
             public void run() {
-                while (true) {
+                while (wait_is_running) {
+                    isChanged = ((preIsReady != is_ready) || (preOtherReady != other_ready));
+                    if(!isChanged){
+                        continue;
+                    }
                     if (is_ready && other_ready) {
+                        Message message=Message.obtain();
+                        message.what = 0x11;
+                        handler.sendMessage(message);
+                        preIsReady = is_ready;
+                        preOtherReady = other_ready;
+                        System.out.println("测试");
                         both_ready = true;
                     } else {
+                        preIsReady = is_ready;
+                        preOtherReady = other_ready;
+                        Message message=Message.obtain();
+                        message.what = 0x12;
+                        handler.sendMessage(message);
                         both_ready = false;
                     }
                 }

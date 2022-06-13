@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent().setClass(MainActivity.this, TableActivity.class);
 
                 if(WaitPreAcitivity.ismuti){
-                    intent = new Intent().setClass(MainActivity.this, MultiEndActivity.class);
+                    intent = new Intent().setClass(MainActivity.this, WaitDieActivity.class);
                 }
                 startActivity(intent);
                 finish();

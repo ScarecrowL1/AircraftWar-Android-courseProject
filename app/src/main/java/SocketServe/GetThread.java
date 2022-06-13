@@ -13,6 +13,9 @@ import static com.example.aircraftwar.WaitPreAcitivity.wait_is_running;
 
 import android.util.Log;
 
+import com.example.aircraftwar.Game;
+import com.example.aircraftwar.WaitDieActivity;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
@@ -37,19 +40,17 @@ public class GetThread extends Thread{
                 }
                 while(level == null){}
                 if (!othergameOverFlag) {
-                        Log.e("123","other is not die");
                         String str = br.readLine();
                         if(str.equals("gameover")){
                             othergameOverFlag = true;
                             finally_score = Other_player_score;
+                            Log.e("1111", Game.othergameOverFlag+"");
                         }
                         Other_player_score = str;
                         continue;
                 }
                 break;
             }
-            br.close();
-            socket.close();
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

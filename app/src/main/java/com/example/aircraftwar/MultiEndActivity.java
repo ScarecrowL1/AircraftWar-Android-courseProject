@@ -17,7 +17,7 @@ public class MultiEndActivity extends AppCompatActivity {
 
         String score = String.valueOf(Game.Score);
         myScore.setText(score);
-        oppoScore.setText(Game.Other_player_score);
+        oppoScore.setText(Game.finally_score);
 
     }
 }

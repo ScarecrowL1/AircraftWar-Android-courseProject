@@ -2,6 +2,7 @@ package SocketServe;
 
 import static com.example.aircraftwar.Game.Other_player_score;
 import static com.example.aircraftwar.Game.gameOverFlag;
+import static com.example.aircraftwar.Game.othergameOverFlag;
 import static com.example.aircraftwar.MenuActivity.level;
 import static com.example.aircraftwar.WaitPreAcitivity.game_is_running;
 import static com.example.aircraftwar.WaitPreAcitivity.is_ready;
@@ -44,7 +45,12 @@ public class PostThread extends Thread{
                         pw.println(Game.Score+"");
                         pw.flush();
                         continue;
-                    }
+                }
+                if(gameOverFlag && !othergameOverFlag){
+                    pw.println("gameover");
+                    pw.flush();
+                    continue;
+                }
                 break;
             }
             pw.close();

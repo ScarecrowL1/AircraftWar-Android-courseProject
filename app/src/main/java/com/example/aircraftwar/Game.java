@@ -81,6 +81,7 @@ public class Game extends View{
     private static int bossenemyMaxNumber = level.size_of_total_boss();
     public static boolean gameOverFlag = false;
     public static String Other_player_score = "";
+    public static String finally_score = "";
 
     private List<MobEnemy> Mob_Enemy_List;
     private List<BaseBullet> Hero_bullet_List;
@@ -91,6 +92,7 @@ public class Game extends View{
     private List<BossEnemy> Boss_Enemy_List;
     private List<AbstractFlyingObject> abstractFlyingObjects;
     private static Fire_Supply_Thread fire_supply_thread = null;
+    public static boolean othergameOverFlag = false;
 
 
     public Game(Context context, AttributeSet attrs) {

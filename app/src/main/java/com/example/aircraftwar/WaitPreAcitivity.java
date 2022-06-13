@@ -37,6 +37,14 @@ public class WaitPreAcitivity extends AppCompatActivity {
         Switch preSwitch = findViewById(R.id.preSwitch);
         Button startButton = findViewById(R.id.startButton);
 
+        /*startButton.setEnabled(false);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                startButton.setEnabled(both_ready);
+            }
+        });*/
+
         new Thread(){
             @Override
             public void run() {

@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(WaitPreAcitivity.ismuti){
                     intent = new Intent().setClass(MainActivity.this, WaitDieActivity.class);
+                    finish();
                 }
                 startActivity(intent);
                 finish();

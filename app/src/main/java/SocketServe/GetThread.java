@@ -33,7 +33,6 @@ public class GetThread extends Thread{
                     }
                     continue;
                 }
-                while(level == null){}
                 if (!gameOverFlag) {
                         String str = br.readLine();
                         Other_player_score = str;

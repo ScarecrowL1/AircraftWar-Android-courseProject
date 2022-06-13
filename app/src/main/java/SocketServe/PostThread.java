@@ -39,7 +39,6 @@ public class PostThread extends Thread{
                     pw.flush();
                     continue;
                 }
-                while(level == null){}
                 if (!gameOverFlag) {
                         pw.println(Game.Score+"");
                         pw.flush();

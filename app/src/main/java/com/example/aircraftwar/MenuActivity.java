@@ -45,7 +45,6 @@ public class MenuActivity extends AppCompatActivity {
         Button easyButton = findViewById(R.id.easyButton);
         Button casualButton = findViewById(R.id.casualButton);
         Button hardButton = findViewById(R.id.hardButton);
-
         Switch soundSwitch = findViewById(R.id.switch1);
 
         //简单按钮

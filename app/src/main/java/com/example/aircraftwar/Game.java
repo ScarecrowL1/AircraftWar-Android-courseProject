@@ -8,6 +8,7 @@ import static com.example.aircraftwar.WaitPreAcitivity.ismuti;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -111,12 +112,15 @@ public class Game extends View{
         Image_Manage image_manage = new Image_Manage(context,attrs);
         if(level instanceof easy_difficulty){
             BACKGROUND_IMAGE = BitmapFactory.decodeResource(getResources(),R.mipmap.easybg);
+            BACKGROUND_IMAGE = Bitmap.createScaledBitmap(BACKGROUND_IMAGE, MainActivity.width, MainActivity.height, true);
         }
         else if(level instanceof normal_difficulty){
             BACKGROUND_IMAGE = BitmapFactory.decodeResource(getResources(),R.mipmap.normalbg);
+            BACKGROUND_IMAGE = Bitmap.createScaledBitmap(BACKGROUND_IMAGE, MainActivity.width, MainActivity.height, true);
         }
         else if(level instanceof hard_difficulty){
             BACKGROUND_IMAGE = BitmapFactory.decodeResource(getResources(),R.mipmap.hardbg);
+            BACKGROUND_IMAGE = Bitmap.createScaledBitmap(BACKGROUND_IMAGE, MainActivity.width, MainActivity.height, true);
         }
         y1 = 0;
         y2 = y1-MainActivity.height;
@@ -284,9 +288,9 @@ public class Game extends View{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         Paint paint = new Paint();
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(5);
+        paint.setStrokeWidth(1);
         paint.setTextSize(50);
         /*
         绘制背景图

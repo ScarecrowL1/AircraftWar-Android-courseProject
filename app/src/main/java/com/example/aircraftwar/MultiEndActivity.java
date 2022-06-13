@@ -27,7 +27,7 @@ public class MultiEndActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent().setClass(MultiEndActivity.this, MenuActivity.class);
+                Intent intent = new Intent().setClass(MultiEndActivity.this, singgleOrMuti.class);
                 startActivity(intent);
                 finish();
             }

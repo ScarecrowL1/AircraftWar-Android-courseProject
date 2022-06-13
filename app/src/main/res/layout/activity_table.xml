@@ -12,6 +12,13 @@
         android:layout_width="match_parent"
         android:theme="@style/Theme.AircraftWar.AppBarOverlay">
 
+        <ImageButton
+            android:id="@+id/tableBackButton"
+            android:layout_width="62dp"
+            android:layout_height="47dp"
+            android:background="@color/purple_500"
+            app:srcCompat="?attr/actionModeCloseDrawable" />
+
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"

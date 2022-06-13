@@ -2,12 +2,15 @@ package com.example.aircraftwar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.aircraftwar.DataDAO.DAOImpl;
@@ -29,6 +32,7 @@ public class TableActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.list);
 
         List<UserData> userDataList = DAOImpl.userDataList;
+        ImageButton backButton = findViewById(R.id.tableBackButton);
         int rank = 0;
         String division = "          ";
         ArrayList<String> dataList = new ArrayList();
@@ -68,7 +72,16 @@ public class TableActivity extends AppCompatActivity {
                 return true;
             }
         });
-        //6、为列表中选中的项添加单击响应事件
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent().setClass(TableActivity.this, singgleOrMuti.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
     }
 }
